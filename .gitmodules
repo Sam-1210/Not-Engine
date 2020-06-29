@@ -8,3 +8,6 @@
 [submodule "Utils\\GLM"]
 	path = Utils\\GLM
 	url = https://github.com/Sam-1210/glm
+[submodule "Utils\\spdlog"]
+	path = Utils\\spdlog
+	url = https://github.com/Sam-1210/spdlog

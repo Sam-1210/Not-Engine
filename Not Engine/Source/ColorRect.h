@@ -1,5 +1,6 @@
 #pragma once
 #include "Rect2D.h"
+#include <memory>
 
 class Shader;
 

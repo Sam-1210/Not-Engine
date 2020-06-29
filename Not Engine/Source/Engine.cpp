@@ -1,5 +1,6 @@
 #include "Engine.h"
 #include "Application.h"
+#include "Log.h"
 #include "Node.h"
 #include "Scene.h"
 #include <glad/glad.h>
@@ -31,10 +32,12 @@ Engine::~Engine()
 void Engine::AddScene(Scene* s)
 {
 	Scenes.push_back(s);
+	NE_CORE_INFO("Added Scene : " + s->GetSceneName());
 }
 
 void Engine::RemoveScene(const unsigned int& Index)
 {
+	NE_CORE_INFO("Removed Scene : " + Scenes[Index]->GetSceneName());
 	Scenes.erase(Scenes.begin() + Index);
 }
 

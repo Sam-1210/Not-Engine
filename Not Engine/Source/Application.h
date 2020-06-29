@@ -1,6 +1,6 @@
 #pragma once
 #include "Global.h"
-#include "AppLog.h"
+#include "Log.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -10,7 +10,6 @@ class Engine;
 class Application
 {
 protected:
-	AppLog* Logger;
 	bool Initialized;
 	bool Resizable;
 	bool VSync;
@@ -43,7 +42,6 @@ public:
 	static void ResizeWindowHandler(GLFWwindow* Window, int w, int h);
 	static void SetContextCurrent(Application* App);
 	/*-----------------------------------Getters--------------------------------------*/
-	AppLog* GetLoggerRef() const;
 	bool GetVSync() const;
 	bool IsResizable() const;
 	bool IsWireframe() const;

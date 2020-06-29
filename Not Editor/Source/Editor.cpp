@@ -1,13 +1,11 @@
 #include "Editor.h"
+#include <Not Engine.h>
+#include <glad/glad.h>
+#include <imgui.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
 #include <filesystem>
-#include "Application.h"
-#include "Global.h"
-#include "Scene.h"
-#include "imgui.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
-#include "glad/glad.h"
-#include "ColorRect.h"		//remove, only for test add object
+
 
 Editor* Editor::Instance = nullptr;
 
@@ -106,6 +104,7 @@ Editor::Editor(const bool& EditMode, Application* App)
 	ImGui_ImplOpenGL3_Init();
 
 	ChangeTheme(Theme);
+	NE_CORE_INFO("All Processes of Editor Started Successfully");
 }
 
 Editor* Editor::InitialiseEditor(const bool& EditMode, Application* App)
@@ -125,6 +124,7 @@ Editor::~Editor()
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();
+	NE_CORE_INFO("Editor Shutdown");
 }
 
 float Editor::GetMainMenuBarHeight()
@@ -198,6 +198,7 @@ void Editor::Frame(Scene* scene)
 	MaxColumnWidth = App->GetWindowSize().x * 0.3;
 	this->SceneTreeEditor();
 	this->PropertyEditor(SelectedNode.node);
+
 	ImGui::Begin("Rendering Info");
 	ImGui::Text("Frametime\t %.3f ms/f\nFPS\t\t %.1f", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	ImGui::End();

@@ -25,14 +25,18 @@ int main()
 	24. viewport 2d and viewport 3d
 	25.
 	*/
-	Application* myApp = new Application("AppDebug", glm::vec2(1280, 720), glm::vec2(320, 180),
-		glm::vec2(4, 4), true, true, false, WrapperEnum::Mode_Windowed, false);
-	MyStatus status = myApp->Init();
+	Application* EditorApp = new Application("Not Editor", glm::vec2(1280, 720), glm::vec2(320, 180),
+		glm::vec2(4, 6), true, true, false, WrapperEnum::Mode_Windowed, false);
+
+	MyStatus status = EditorApp->Init();
 
 	if (status != MyStatus::Init_Success)
 		return (int)status;
-	Editor* editor = Editor::InitialiseEditor(true, myApp);
-	Engine* eg = myApp->GetEngine();
+
+	Editor* editor = Editor::InitialiseEditor(true, EditorApp);
+	Engine* eg = EditorApp->GetEngine();
+	Scene* newScene = new Scene("Testing");
+	eg->AddScene(newScene);
 	Node2D* rect = new ColorRect("Red Square", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 	Node2D* rect1 = new ColorRect("Green Square", glm::vec4(0.0f, 1.0f, 0.0f, 0.6f));
 	Node2D* rect2 = new ColorRect("Blue Square", glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
@@ -42,15 +46,13 @@ int main()
 	rect1->SetScale(0.5f, 0.5f);
 	rect2->SetScale(0.25f, 0.25f);
 
-	Scene* newScene = new Scene("Scene 1");
-	eg->AddScene(newScene);
 	Node* root = newScene->GetSceneRoot();
 	root->AddChild(rect);
 	rect->AddChild(rect2);
 	root->AddChild(rect1);
 	root->AddChild(new TextureRect("Logo", EnginePath::TextureFolder + "NotEngine.jpg"));
 
-	while (myApp->WindowIsNotClosed())
+	while (EditorApp->WindowIsNotClosed())
 	{
 		eg->NewFrame();
 		eg->Process();
@@ -60,6 +62,6 @@ int main()
 		eg->EndFrame();
 	}
 
-	delete myApp;
+	delete EditorApp;
 	return 0;
 }

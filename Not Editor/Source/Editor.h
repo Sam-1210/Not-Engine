@@ -1,5 +1,7 @@
 #pragma once
-#include "Node.h"
+#include <string>
+
+class Node;
 
 class Application;
 class Scene;

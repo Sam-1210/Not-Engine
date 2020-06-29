@@ -7,6 +7,11 @@ workspace "Not Engine"
 		"Release" 
 	}
 
+	flags
+	{
+		"MultiProcessorCompile"
+	}
+
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 UtilsDir = {}
@@ -16,6 +21,7 @@ UtilsDir["ImGui"] = "Utils/IMGUI"
 UtilsDir["glm"] = "Utils/GLM"
 UtilsDir["stb_image"] = "Utils/STBI"
 UtilsDir["Drivers"] = "Utils/Drivers"
+UtilsDir["spdlog"] = "Utils/spdlog"
 
 group "Dependencies"
 	include "Utils/GLAD"
@@ -51,6 +57,8 @@ project "Not Engine"
 		"%{UtilsDir.glm}",
 		"%{UtilsDir.stb_image}",
 		"%{UtilsDir.Drivers}",
+		"%{UtilsDir.spdlog}/include",
+
 	}
 
 	links 
@@ -113,6 +121,7 @@ project "Not Editor"
 		"%{UtilsDir.glm}",
 		"%{UtilsDir.stb_image}",
 		"%{UtilsDir.Drivers}",
+		"%{UtilsDir.spdlog}/include",
 	}
 
 	links 

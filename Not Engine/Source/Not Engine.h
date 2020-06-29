@@ -3,6 +3,7 @@
 /** For Use by Others */
 
 #include <Application.h>
+#include <Log.h>
 #include <Engine.h>
 #include <Scene.h>
 #include <Node.h>
