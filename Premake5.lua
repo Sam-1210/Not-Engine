@@ -18,6 +18,7 @@ UtilsDir["stb_image"] = "Utils/STBI"
 UtilsDir["Drivers"] = "Utils/Drivers"
 
 group "Dependencies"
+	include "Utils/GLAD"
 	include "Utils/GLFW"
 	include "Utils/IMGUI"
 group ""
@@ -33,8 +34,6 @@ project "Not Engine"
 	{ 
 		"%{prj.name}/Source/**.h",
 		"%{prj.name}/Source/**.cpp" ,
-		"Utils/GLAD/**.h",
-		"Utils/GLAD/**.c",
 		"Utils/GLM/glm/**.hpp",
 		"Utils/GLM/glm/**.inl",
 		"Utils/STBI/**.h" ,
@@ -45,8 +44,8 @@ project "Not Engine"
 
 	includedirs
 	{
-		"%{UtilsDir.GLFW}/include",
 		"%{UtilsDir.GLAD}/include",
+		"%{UtilsDir.GLFW}/include",
 		"%{UtilsDir.ImGui}",
 		"%{UtilsDir.ImGui}/misc/cpp",
 		"%{UtilsDir.glm}",
@@ -56,6 +55,7 @@ project "Not Engine"
 
 	links 
 	{
+		"GLAD",
 		"GLFW",
 		"IMGUI",
 		"opengl32.lib"
@@ -95,8 +95,6 @@ project "Not Editor"
 	{ 
 		"%{prj.name}/Source/**.h",
 		"%{prj.name}/Source/**.cpp" ,
-		"Utils/GLAD/**.h",
-		"Utils/GLAD/**.c",
 		"Utils/GLM/glm/**.hpp",
 		"Utils/GLM/glm/**.inl",
 		"Utils/STBI/**.h" ,
@@ -108,8 +106,8 @@ project "Not Editor"
 	includedirs
 	{
 		"Not Engine/Source",
-		"%{UtilsDir.GLFW}/include",
 		"%{UtilsDir.GLAD}/include",
+		"%{UtilsDir.GLFW}/include",
 		"%{UtilsDir.ImGui}",
 		"%{UtilsDir.ImGui}/misc/cpp",
 		"%{UtilsDir.glm}",
@@ -120,15 +118,16 @@ project "Not Editor"
 	links 
 	{ 
 		"Not Engine",
+		"GLAD",
 		"GLFW",
 		"IMGUI",
-		"opengl32.lib"
+		"opengl32.lib",
 	}
 
 	defines
 	{
 		"GLFW_INCLUDE_NONE",
-		"IMGUI_IMPL_OPENGL_LOADER_GLAD"
+		"IMGUI_IMPL_OPENGL_LOADER_GLAD",
 	}
 
 	debugdir(".\\")
