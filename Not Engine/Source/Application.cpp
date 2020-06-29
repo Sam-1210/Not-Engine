@@ -1,21 +1,20 @@
 #include <string>
 #include "Application.h"
 #include "Engine.h"
-#include "Editor.h"
+#include "Log.h"
+#include <iostream>
 
 int Application::InstanceCounter = 0;
 Application* Application::ActiveApplication = nullptr;
 
 Application::Application()
 {
-	Logger = AppLog::InitiateLogger(true);
 	Initialized = false;
 	Resizable = true;
 	VSync = false;
 	Wireframe = false;
 	ID = InstanceCounter++;
 	engine = new Engine(ID, this);
-	editor = nullptr;
 	GL_Version = glm::vec2(3, 3);
 	WindowMode = WrapperEnum::Mode_Windowed;
 	WindowPosition = glm::vec2(0, 50);
@@ -23,22 +22,20 @@ Application::Application()
 	ViewportSize = WindowSize;
 	WindowTitle = "Application";
 	window = nullptr;
-
-	Logger->LogToFileAndConsole("Application Created, Instance ID : " + std::to_string(ID));
+	Logger::Init();
+	std::cout << "\t\t\t\t\t:::::::: NotEngine ::::::::\n\n\n\n";
 }
 
 Application::Application(const std::string& WinTitle, const glm::vec2& _WinSize, const glm::vec2 WinPos,
 	const glm::vec2& _GL_Version, const bool& Logging, const bool& _Resizable, 
 	const bool& _VerticalSync, const WrapperEnum& WinMode, const bool& _Wireframe)
 {
-	Logger = AppLog::InitiateLogger(true);
 	Initialized = false;
 	Resizable = _Resizable;
 	VSync = _VerticalSync;
 	Wireframe = _Wireframe;
 	ID = InstanceCounter++;
 	engine = new Engine(ID, this);
-	editor = nullptr;
 	GL_Version = _GL_Version;
 	WindowMode = WinMode;
 	WindowPosition = WinPos;
@@ -46,14 +43,14 @@ Application::Application(const std::string& WinTitle, const glm::vec2& _WinSize,
 	ViewportSize = WindowSize;
 	WindowTitle = WinTitle;
 	window = nullptr;
-	Logger->LogToFileAndConsole("Application Created, Instance ID : " + std::to_string(ID));
+	Logger::Init();
+	std::cout << "\t\t\t\t\t:::::::: NotEngine ::::::::\n\n\n\n";
 }
 
 Application::~Application()
 {
 	--InstanceCounter;
-	Logger->LogToFileAndConsole("Application Deleted, Instance ID : " + std::to_string(ID));
-	delete Logger;
+	NE_CORE_INFO("Application Deleted, Instance ID : {0}", ID);
 	glfwTerminate();
 }
 
@@ -61,22 +58,21 @@ MyStatus Application::Init()
 {
 	if (this->Initialized)
 		return MyStatus::Already_Initialized;
-	Logger->LogToFileAndConsole("Application Initialization Started");
+
 	if (!glfwInit())
 	{
-		Logger->LogToFileAndConsole("GLFW failed to Initialize");
-		Logger->LogToFileAndConsole("Application Initialization Failed");
+		NE_CORE_CRITICAL("GLFW failed to Initialize");
+		NE_CORE_ERROR("Application Initialization Failed");
 		return MyStatus::GLFW_Init_Error;
 	}
 
 	window = glfwCreateWindow((int)WindowSize.x, (int)WindowSize.y, WindowTitle.c_str(), nullptr, nullptr);
 	if (!window)
 	{
-		Logger->LogToFileAndConsole("GLFW failed to Create Window");
-		Logger->LogToFileAndConsole("Application Initialization Failed");
+		NE_CORE_CRITICAL("GLFW failed to Create Window");
+		NE_CORE_ERROR("Application Initialization Failed");
 		return MyStatus::Window_Creation_Error;
 	}
-	Logger->LogToFileAndConsole("Window " + WindowTitle +" Created Successfully");
 
 	SetContextCurrent(this);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, (int)GL_Version.x);
@@ -89,16 +85,20 @@ MyStatus Application::Init()
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
-		Logger->LogToFileAndConsole("GLEW failed to Initialize");
-		Logger->LogToFileAndConsole("Application Initialization Failed");
+		NE_CORE_CRITICAL("GLAD failed to Initialize");
+		NE_CORE_ERROR("Application Initialization Failed");
 		return MyStatus::GLAD_Init_Error;
 	}
 
-	editor = Editor::InitialiseEditor(true, this);
+	std::cout << "************ OpenGL Log ************\n";
+	std::cout << "Vendor\t\t:\t" << glGetString(GL_VENDOR) << "\n";
+	std::cout << "Renderer\t:\t" << glGetString(GL_RENDERER) << "\n";
+	std::cout << "OpenGL Version\t:\t" << glGetString(GL_VERSION) << "\n";
+	std::cout << "************************************\n\n";
+	NE_CORE_INFO("Window \'" + WindowTitle + "\' Created Successfully");
+	NE_CORE_INFO("Application Initialized Successfully, Instance ID {0}", ID);
 
-	Logger->LogToFileAndConsole("Application Initialized Successfully");
 	this->Initialized = true;
-
 	return MyStatus::Init_Success;
 }
 
@@ -116,19 +116,7 @@ void Application::SetContextCurrent(Application* App)
 void Application::ResizeWindowHandler(GLFWwindow* Window, int w, int h)
 {
 	ActiveApplication->SetWindowSize(glm::vec2(w, h));
-	float Up = ActiveApplication->editor->GetMainMenuBarHeight();
-	float Left = ActiveApplication->editor->GetLeftPanelWidth();
-	float Right = ActiveApplication->editor->GetRightPanelWidth();
-
-	ActiveApplication->ViewportSize.x = w - (Left + Right);
-	ActiveApplication->ViewportSize.y = h;
-
-	glViewport(Left, Up, w - (Left + Right), h);
-}
-
-AppLog* Application::GetLoggerRef() const
-{
-	return Logger;
+	glViewport(0, 0, w, h);
 }
 
 bool Application::GetVSync() const
@@ -150,7 +138,7 @@ bool Application::WindowIsNotClosed() const
 {
 	bool status = glfwWindowShouldClose(window);
 	if (status)
-		Logger->LogToFileAndConsole("Window " + WindowTitle +" Closed");
+		NE_CORE_WARN("Window " + WindowTitle +" Closed");
 	return !status;
 }
 
@@ -205,12 +193,12 @@ void Application::SetDepthTest(const bool& DepthTest)
 	if (DepthTest)
 	{
 		glEnable(GL_DEPTH_TEST);
-		Logger->LogToFileAndConsole("DepthTest Enabled");
+		NE_CORE_INFO("DepthTest Enabled");
 	}
 	else
 	{
 		glDisable(GL_DEPTH_TEST);
-		Logger->LogToFileAndConsole("DepthTest Disabled");
+		NE_CORE_WARN("DepthTest Disabled");
 	}
 }
 

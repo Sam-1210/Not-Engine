@@ -1,7 +1,7 @@
 #include "Rect2D.h"
-#include "glad/glad.h"
-#include "gtc/matrix_transform.hpp"
 #include "Application.h"
+#include <glad/glad.h>
+#include <glm/gtc/matrix_transform.hpp>
 
 
 bool Rect2D::BuffersSet = false;

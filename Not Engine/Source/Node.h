@@ -2,8 +2,6 @@
 #include <string>
 #include <vector>
 #include "Global.h"
-#include <iostream>				//to be removed
-#define LOG(x) std::cout<<x<<std::endl;				//to be removed
 
 class Node
 {

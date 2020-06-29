@@ -1,6 +1,6 @@
 #pragma once
 #include "Node.h"
-#include "glm.hpp"
+#include <glm/glm.hpp>
 
 class Node3D : public Node
 {
@@ -20,4 +20,6 @@ public:
 	inline glm::vec3 GetRotation() const { return this->Rotation; }
 	inline glm::vec3 GetPosition() const { return this->Position; }
 	inline glm::vec3 GetScale() const { return this->Scale; }
+
+	virtual void PropertyEditor();
 };

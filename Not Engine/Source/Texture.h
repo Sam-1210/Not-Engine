@@ -2,7 +2,7 @@
 #include <string>
 #include <unordered_map>
 
-static struct Flags
+struct Flags
 {
 	bool Repeat;
 	bool Mirrored_Repeat;

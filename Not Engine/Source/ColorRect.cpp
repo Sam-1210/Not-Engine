@@ -1,12 +1,9 @@
 #include "ColorRect.h"
 #include "Shader.h"
 #include "Application.h"
-#include "glad/glad.h"
-#include "gtc/matrix_transform.hpp"
-#include "GLFW/glfw3.h"
-#include "imgui.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
+#include <glad/glad.h>
+#include <glm/gtc/matrix_transform.hpp>
+#include <GLFW/glfw3.h>
 
 ColorRect::ColorRect() : Rect2D("ColorRect")
 {
@@ -26,26 +23,6 @@ ColorRect::ColorRect(const std::string& Name, const glm::vec4& Color)
 {
 	ColorShader = Shader::Add("ColorRect");
 	RectColor = Color;
-}
-
-
-void ColorRect::PropertyEditor()
-{
-	Node2D::PropertyEditor();
-
-	static bool isNotCollapsed = true;
-	ImGui::SetNextItemOpen(isNotCollapsed);
-	if (ImGui::CollapsingHeader("ColorRect"))
-	{
-		ImGui::Checkbox("Transparent", &isTransparent);
-		float tmpVec[4] = { RectColor.r, RectColor.g, RectColor.b, RectColor.a };
-		if (ImGui::ColorEdit4("Color", tmpVec))
-			SetColor(glm::vec4(tmpVec[0], tmpVec[1], tmpVec[2], tmpVec[3]));
-
-		isNotCollapsed = true;
-	}
-	else
-		isNotCollapsed = false;
 }
 
 void ColorRect::_process()

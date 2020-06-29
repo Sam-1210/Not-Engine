@@ -1,12 +1,8 @@
 #include "TextureRect.h"
 #include "Application.h"
-#include "Editor.h"
-#include "glad/glad.h"
-#include "gtc/matrix_transform.hpp"
-#include "GLFW/glfw3.h"
-#include "imgui.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
+#include <glad/glad.h>
+#include <glm/gtc/matrix_transform.hpp>
+#include <GLFW/glfw3.h>
 
 TextureRect::TextureRect() : Rect2D("TextureRect")
 {
@@ -30,27 +26,6 @@ TextureRect::TextureRect(const std::string& Name, const std::string& TexturePath
 
 TextureRect::~TextureRect()
 {
-}
-
-void TextureRect::PropertyEditor()
-{
-	Node2D::PropertyEditor();
-
-	static bool isNotCollapsed = true;
-	ImGui::SetNextItemOpen(isNotCollapsed);
-	if (ImGui::CollapsingHeader("TextureRect"))
-	{
-		ImGui::Checkbox("Transparent", &isTransparent);
-		isNotCollapsed = true;
-		ImGui::Text("Preview Texture");
-		ImTextureID TexPreview = (void*)TextureData->GetTextureID();
-		ImVec2 PanelSize = ImVec2(Editor::GetInstance()->GetRightPanelWidth() * 0.8, Editor::GetInstance()->GetRightPanelWidth() * 0.8);
-		ImGui::SetCursorPos(ImVec2((ImGui::GetWindowSize().x - PanelSize.x) / 2, ImGui::GetCursorPos().y));
-		if(ImGui::ImageButton(TexPreview, PanelSize, ImVec2(0, 1), ImVec2(1, 0), 2, ImVec4(0.0f, 0.0f, 0.0f, 1.0f)))
-			LOG("Texture Menu with Flags")
-	}
-	else
-		isNotCollapsed = false;
 }
 
 void TextureRect::_process()

@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 #include <unordered_map>
-#include "glm.hpp"
-#include "AppLog.h"
+#include <glm/glm.hpp>
+#include "Log.h"
 #include "Global.h"
 
 
@@ -15,7 +15,6 @@ private:
 	std::string Name;
 	std::string SystemPath;
 	std::unordered_map<std::string, int> UniformLocationCache;
-	static AppLog* Logger;
 	static std::vector<std::shared_ptr<Shader>> Shaders;
 
 	Shader(const std::string& ShaderName, const bool& EnableGeometryShader = false);

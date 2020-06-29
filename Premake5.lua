@@ -1,10 +1,15 @@
 workspace "Not Engine"
 	architecture "x64"
-	
+	startproject "Not Editor"
 	configurations 
 	{ 	
 		"Debug", 
 		"Release" 
+	}
+
+	flags
+	{
+		"MultiProcessorCompile"
 	}
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
@@ -16,8 +21,10 @@ UtilsDir["ImGui"] = "Utils/IMGUI"
 UtilsDir["glm"] = "Utils/GLM"
 UtilsDir["stb_image"] = "Utils/STBI"
 UtilsDir["Drivers"] = "Utils/Drivers"
+UtilsDir["spdlog"] = "Utils/spdlog"
 
 group "Dependencies"
+	include "Utils/GLAD"
 	include "Utils/GLFW"
 	include "Utils/IMGUI"
 group ""
@@ -33,11 +40,8 @@ project "Not Engine"
 	{ 
 		"%{prj.name}/Source/**.h",
 		"%{prj.name}/Source/**.cpp" ,
-		"Utils/GLAD/**.h",
-		"Utils/GLAD/**.c",
-		"Utils/GLM/**.hpp",
-		"Utils/GLM/**.cpp" ,
-		"Utils/GLM/**.inl",
+		"Utils/GLM/glm/**.hpp",
+		"Utils/GLM/glm/**.inl",
 		"Utils/STBI/**.h" ,
 		"Utils/STBI/**.cpp" ,
 		"Utils/Drivers/**.h",
@@ -46,17 +50,20 @@ project "Not Engine"
 
 	includedirs
 	{
-		"%{UtilsDir.GLFW}/include",
 		"%{UtilsDir.GLAD}/include",
+		"%{UtilsDir.GLFW}/include",
 		"%{UtilsDir.ImGui}",
 		"%{UtilsDir.ImGui}/misc/cpp",
 		"%{UtilsDir.glm}",
 		"%{UtilsDir.stb_image}",
 		"%{UtilsDir.Drivers}",
+		"%{UtilsDir.spdlog}/include",
+
 	}
 
 	links 
 	{
+		"GLAD",
 		"GLFW",
 		"IMGUI",
 		"opengl32.lib"
@@ -96,11 +103,8 @@ project "Not Editor"
 	{ 
 		"%{prj.name}/Source/**.h",
 		"%{prj.name}/Source/**.cpp" ,
-		"Utils/GLAD/**.h",
-		"Utils/GLAD/**.c",
-		"Utils/GLM/**.hpp",
-		"Utils/GLM/**.cpp" ,
-		"Utils/GLM/**.inl",
+		"Utils/GLM/glm/**.hpp",
+		"Utils/GLM/glm/**.inl",
 		"Utils/STBI/**.h" ,
 		"Utils/STBI/**.cpp",
 		"Utils/Drivers/**.h",
@@ -110,27 +114,29 @@ project "Not Editor"
 	includedirs
 	{
 		"Not Engine/Source",
-		"%{UtilsDir.GLFW}/include",
 		"%{UtilsDir.GLAD}/include",
+		"%{UtilsDir.GLFW}/include",
 		"%{UtilsDir.ImGui}",
 		"%{UtilsDir.ImGui}/misc/cpp",
 		"%{UtilsDir.glm}",
 		"%{UtilsDir.stb_image}",
 		"%{UtilsDir.Drivers}",
+		"%{UtilsDir.spdlog}/include",
 	}
 
 	links 
 	{ 
 		"Not Engine",
+		"GLAD",
 		"GLFW",
 		"IMGUI",
-		"opengl32.lib"
+		"opengl32.lib",
 	}
 
 	defines
 	{
 		"GLFW_INCLUDE_NONE",
-		"IMGUI_IMPL_OPENGL_LOADER_GLAD"
+		"IMGUI_IMPL_OPENGL_LOADER_GLAD",
 	}
 
 	debugdir(".\\")

@@ -1,9 +1,5 @@
 #include "Node.h"
 #include <sstream>
-#include "imgui.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
-#include "imgui_stdlib.h"
 
 #define ErrNoParentString "There's No Parent for This Node"
 #define ErrIndexOutOfBoundsString "Index Out of Bounds"
@@ -35,27 +31,6 @@ Node::~Node()
 	{
 		delete node;
 	}
-}
-
-void Node::PropertyEditor()
-{
-	static bool HeaderOpened = true;
-	ImGui::SetNextItemOpen(HeaderOpened);
-	if (ImGui::CollapsingHeader("Node"))
-	{
-		std::string tmp = Name;
-		if (ImGui::InputText("Name", &tmp, ImGuiInputTextFlags_EnterReturnsTrue))
-		{
-			if (tmp.size())
-				Rename(std::move(tmp));
-			else
-				Rename("Unnamed Node");
-		}
-		ImGui::Checkbox("Visible", &Visible);
-		HeaderOpened = true;
-	}
-	else
-		HeaderOpened = false;
 }
 
 void Node::_process()

@@ -1,24 +1,21 @@
 #pragma once
 #include "Global.h"
-#include "AppLog.h"
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
-#include "glm.hpp"
+#include "Log.h"
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 
 class Engine;
-class Editor;
 
 class Application
 {
 protected:
-	AppLog* Logger;
 	bool Initialized;
 	bool Resizable;
 	bool VSync;
 	bool Wireframe;
 	int ID;
 	Engine* engine;
-	Editor* editor;
 	glm::vec2 GL_Version;
 	glm::vec2 WindowPosition;
 	glm::vec2 WindowSize;
@@ -45,7 +42,6 @@ public:
 	static void ResizeWindowHandler(GLFWwindow* Window, int w, int h);
 	static void SetContextCurrent(Application* App);
 	/*-----------------------------------Getters--------------------------------------*/
-	AppLog* GetLoggerRef() const;
 	bool GetVSync() const;
 	bool IsResizable() const;
 	bool IsWireframe() const;

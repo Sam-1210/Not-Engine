@@ -1,10 +1,9 @@
 #include "Shader.h"
 #include <fstream>
 #include <sstream>
-#include "glad/glad.h"
-#include "gtc/type_ptr.hpp"
+#include <glad/glad.h>
+#include <glm/gtc/type_ptr.hpp>
 
-AppLog* Shader::Logger = AppLog::InitiateLogger(true);
 std::vector<std::shared_ptr<Shader>> Shader::Shaders;
 
 unsigned int Shader::CompileShader(ShaderEnum type)
@@ -43,7 +42,7 @@ unsigned int Shader::GetUniformLocation(const std::string& UniformName)
 	int loc = glGetUniformLocation(Program, UniformName.c_str());
 
 	if (loc == -1)
-		Logger->LogToFileAndConsole("<Warning> Uniform: " + UniformName + " Doesn't Exist");
+		NE_CORE_WARN("<Warning> Uniform: " + UniformName + " Doesn't Exist");
 	UniformLocationCache[UniformName] = loc;
 
 	return loc;
@@ -69,7 +68,7 @@ ShaderEnum Shader::CompileStatus(unsigned int Shader)
 		char* compileLog = new char[logLength]; //(char*)alloca(logLength * sizeof(char));
 		glGetShaderInfoLog(Shader, logLength, &logLength, compileLog);
 
-		Logger->LogToFileAndConsole("SHADER COMPILE ERROR : " + std::string(compileLog));
+		NE_CORE_ERROR("SHADER COMPILE ERROR : " + std::string(compileLog));
 
 		delete[] compileLog;
 
@@ -143,9 +142,9 @@ Shader::Shader(const std::string& ShaderName, const bool& EnableGeometryShader)
 	glDeleteShader(Compiled_FS);
 
 	if(CompiledStatus)
-		Logger->LogToFileAndConsole("Compiled Shader \"" + Name + "\" Successfully");
+		NE_CORE_INFO("Compiled Shader \"" + Name + "\" Successfully");
 	else
-		Logger->LogToFileAndConsole("Compiling Shader \"" + Name + "\" Failed");
+		NE_CORE_CRITICAL("Compiling Shader \"" + Name + "\" Failed");
 
 	IndexInCache = Shaders.size();
 	Shaders.push_back(std::shared_ptr<Shader>(this));
