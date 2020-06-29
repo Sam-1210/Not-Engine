@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "Editor.h"
 #include "glad/glad.h"
-#include "gtc/matrix_transform.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 #include "GLFW/glfw3.h"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"

@@ -1,6 +1,6 @@
 #pragma once
 #include "Node.h"
-#include "glm.hpp"
+#include "glm/glm.hpp"
 
 class Node3D : public Node
 {

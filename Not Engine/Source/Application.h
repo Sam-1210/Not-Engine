@@ -3,7 +3,7 @@
 #include "AppLog.h"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
-#include "glm.hpp"
+#include "glm/glm.hpp"
 
 class Engine;
 class Editor;

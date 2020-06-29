@@ -2,7 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include "glad/glad.h"
-#include "gtc/type_ptr.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 AppLog* Shader::Logger = AppLog::InitiateLogger(true);
 std::vector<std::shared_ptr<Shader>> Shader::Shaders;

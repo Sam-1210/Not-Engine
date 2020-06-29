@@ -1,6 +1,6 @@
 workspace "Not Engine"
 	architecture "x64"
-	
+	startproject "Not Editor"
 	configurations 
 	{ 	
 		"Debug", 
@@ -13,7 +13,7 @@ UtilsDir = {}
 UtilsDir["GLFW"] = "Utils/GLFW"
 UtilsDir["GLAD"] = "Utils/GLAD"
 UtilsDir["ImGui"] = "Utils/IMGUI"
-UtilsDir["glm"] = "Utils/GLM/glm"
+UtilsDir["glm"] = "Utils/GLM"
 UtilsDir["stb_image"] = "Utils/STBI"
 UtilsDir["Drivers"] = "Utils/Drivers"
 
@@ -35,9 +35,8 @@ project "Not Engine"
 		"%{prj.name}/Source/**.cpp" ,
 		"Utils/GLAD/**.h",
 		"Utils/GLAD/**.c",
-		"Utils/GLM/**.hpp",
-		"Utils/GLM/**.cpp" ,
-		"Utils/GLM/**.inl",
+		"Utils/GLM/glm/**.hpp",
+		"Utils/GLM/glm/**.inl",
 		"Utils/STBI/**.h" ,
 		"Utils/STBI/**.cpp" ,
 		"Utils/Drivers/**.h",
@@ -98,9 +97,8 @@ project "Not Editor"
 		"%{prj.name}/Source/**.cpp" ,
 		"Utils/GLAD/**.h",
 		"Utils/GLAD/**.c",
-		"Utils/GLM/**.hpp",
-		"Utils/GLM/**.cpp" ,
-		"Utils/GLM/**.inl",
+		"Utils/GLM/glm/**.hpp",
+		"Utils/GLM/glm/**.inl",
 		"Utils/STBI/**.h" ,
 		"Utils/STBI/**.cpp",
 		"Utils/Drivers/**.h",
