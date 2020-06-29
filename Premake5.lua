@@ -13,7 +13,7 @@ UtilsDir = {}
 UtilsDir["GLFW"] = "Utils/GLFW"
 UtilsDir["GLAD"] = "Utils/GLAD"
 UtilsDir["ImGui"] = "Utils/IMGUI"
-UtilsDir["glm"] = "Utils/GLM"
+UtilsDir["glm"] = "Utils/GLM/glm"
 UtilsDir["stb_image"] = "Utils/STBI"
 UtilsDir["Drivers"] = "Utils/Drivers"
 
