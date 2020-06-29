@@ -1,6 +1,6 @@
 #include "Texture.h"
-#include "glad/glad.h"
 #include "stb_image.h"
+#include <glad/glad.h>
 
 unsigned int Texture::InstanceCounter = 0;
 std::unordered_map<std::string, unsigned int> Texture::TextureCache;

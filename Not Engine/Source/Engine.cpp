@@ -1,10 +1,9 @@
 #include "Engine.h"
 #include "Application.h"
-#include "Editor.h"
 #include "Node.h"
 #include "Scene.h"
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 void Engine::DelayFix()
 {
@@ -48,8 +47,6 @@ void Engine::NewFrame()
 
 void Engine::EndFrame()
 {
-	Editor::GetInstance()->Frame(Scenes[Scenes.size() - 1]);
-
 	glfwSwapBuffers(Parent->GetWindowObject());
 	glfwPollEvents();
 }

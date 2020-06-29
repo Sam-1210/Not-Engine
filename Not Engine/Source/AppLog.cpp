@@ -1,10 +1,10 @@
+#include "AppLog.h"
+#include "Global.h"
 #include <time.h>
 #include <algorithm>
 #include <iostream>
 #include <string>
 #include <Windows.h>
-#include "AppLog.h"
-#include "Global.h"
 
 AppLog* AppLog::Logger = nullptr;
 

@@ -1,12 +1,11 @@
 #pragma once
 #include "Global.h"
 #include "AppLog.h"
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
-#include "glm/glm.hpp"
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 
 class Engine;
-class Editor;
 
 class Application
 {
@@ -18,7 +17,6 @@ protected:
 	bool Wireframe;
 	int ID;
 	Engine* engine;
-	Editor* editor;
 	glm::vec2 GL_Version;
 	glm::vec2 WindowPosition;
 	glm::vec2 WindowSize;

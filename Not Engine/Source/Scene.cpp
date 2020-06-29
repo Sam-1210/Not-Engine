@@ -1,7 +1,7 @@
 #include "Scene.h"
-#include "imgui.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
+#include <imgui.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
 
 Scene::Scene(const std::string& _SceneName)
 {

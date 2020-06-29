@@ -21,6 +21,8 @@ public:
 	Engine(const int& ID, Application* App);
 	~Engine();
 	
+	inline Scene* GetCurrentScene() const { return Scenes[Scenes.size() - 1];  }
+
 	virtual void AddScene(Scene* s);
 	virtual void RemoveScene(const unsigned int& Index);
 

@@ -1,7 +1,6 @@
 #include <string>
 #include "Application.h"
 #include "Engine.h"
-#include "Editor.h"
 
 int Application::InstanceCounter = 0;
 Application* Application::ActiveApplication = nullptr;
@@ -15,7 +14,6 @@ Application::Application()
 	Wireframe = false;
 	ID = InstanceCounter++;
 	engine = new Engine(ID, this);
-	editor = nullptr;
 	GL_Version = glm::vec2(3, 3);
 	WindowMode = WrapperEnum::Mode_Windowed;
 	WindowPosition = glm::vec2(0, 50);
@@ -38,7 +36,6 @@ Application::Application(const std::string& WinTitle, const glm::vec2& _WinSize,
 	Wireframe = _Wireframe;
 	ID = InstanceCounter++;
 	engine = new Engine(ID, this);
-	editor = nullptr;
 	GL_Version = _GL_Version;
 	WindowMode = WinMode;
 	WindowPosition = WinPos;
@@ -94,8 +91,6 @@ MyStatus Application::Init()
 		return MyStatus::GLAD_Init_Error;
 	}
 
-	editor = Editor::InitialiseEditor(true, this);
-
 	Logger->LogToFileAndConsole("Application Initialized Successfully");
 	this->Initialized = true;
 
@@ -116,14 +111,7 @@ void Application::SetContextCurrent(Application* App)
 void Application::ResizeWindowHandler(GLFWwindow* Window, int w, int h)
 {
 	ActiveApplication->SetWindowSize(glm::vec2(w, h));
-	float Up = ActiveApplication->editor->GetMainMenuBarHeight();
-	float Left = ActiveApplication->editor->GetLeftPanelWidth();
-	float Right = ActiveApplication->editor->GetRightPanelWidth();
-
-	ActiveApplication->ViewportSize.x = w - (Left + Right);
-	ActiveApplication->ViewportSize.y = h;
-
-	glViewport(Left, Up, w - (Left + Right), h);
+	glViewport(0, 0, w, h);
 }
 
 AppLog* Application::GetLoggerRef() const

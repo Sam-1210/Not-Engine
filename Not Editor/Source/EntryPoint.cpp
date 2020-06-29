@@ -1,5 +1,6 @@
-#include "Not Engine.h"
+#include <Not Engine.h>
 #include <Windows.h>
+#include "Editor.h"
 
 int main()
 {
@@ -30,6 +31,7 @@ int main()
 
 	if (status != MyStatus::Init_Success)
 		return (int)status;
+	Editor* editor = Editor::InitialiseEditor(true, myApp);
 	Engine* eg = myApp->GetEngine();
 	Node2D* rect = new ColorRect("Red Square", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 	Node2D* rect1 = new ColorRect("Green Square", glm::vec4(0.0f, 1.0f, 0.0f, 0.6f));
@@ -54,6 +56,7 @@ int main()
 		eg->Process();
 		eg->Update();
 		eg->Render();
+		editor->Frame(eg->GetCurrentScene());
 		eg->EndFrame();
 	}
 

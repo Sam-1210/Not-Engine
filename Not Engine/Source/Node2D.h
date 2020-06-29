@@ -1,6 +1,6 @@
 #pragma once
 #include "Node.h"
-#include "glm/glm.hpp"
+#include <glm/glm.hpp>
 
 class Node2D : public Node
 {
@@ -24,5 +24,5 @@ public:
 	inline glm::vec2 GetPosition() const { return this->Position; }
 	inline glm::vec2 GetScale() const { return this->Scale; }
 	
-	void PropertyEditor();
+	virtual void PropertyEditor();
 };
