@@ -1,0 +1,57 @@
+#pragma once
+#include <string>
+#include <vector>
+
+
+/*	TODO
+	- Add Sorting	
+*/
+namespace Files
+{
+	struct FileObject;
+	struct DirectoryObject;
+	class FileSystem;
+}
+
+static struct Files::FileObject
+{
+	Files::DirectoryObject ParentDir;
+	std::string FileName;
+	std::string FileType;
+
+	bool Rename();
+};
+
+static struct Files::DirectoryObject
+{
+	Files::DirectoryObject ParentDir;
+	std::string DirectoryName;
+
+	std::vector<Files::DirectoryObject> ChildrenDirectory;
+	std::vector<Files::FileObject> ChildrenFiles;
+
+	void NewDirectory();
+	bool Rename();
+};
+
+static class Files::FileSystem
+{
+private:
+	Files::DirectoryObject Root;
+	std::string LastKnownPath;
+
+	void Traverse(const Files::DirectoryObject& node);
+	void Render(const Files::DirectoryObject& node);
+public:
+	FileSystem(const std::string& RootDir);
+	~FileSystem();
+
+	std::string OpenFile();
+	std::string OpenFile(const std::string FromPath);
+
+	void RefreshAll();
+	void RefreshCurrent();
+	void Back();
+
+	inline std::string GetRoot() const { return this->Root.DirectoryName; }
+};
