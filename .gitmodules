@@ -10,4 +10,4 @@
 	branch = docking
 [submodule "Utils/spdlog"]
 	path = Utils/spdlog
-	url = https://github.com/Sam-1210/imgui
+	url = https://github.com/Sam-1210/spdlog
