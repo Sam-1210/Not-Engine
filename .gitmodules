@@ -1,3 +1,13 @@
 [submodule "Utils/GLFW"]
 	path = Utils/GLFW
 	url = https://github.com/Sam-1210/glfw
+[submodule "Utils/GLM"]
+	path = Utils/GLM
+	url = https://github.com/Sam-1210/glm
+[submodule "Utils/IMGUI"]
+	path = Utils/IMGUI
+	url = https://github.com/Sam-1210/imgui
+	branch = docking
+[submodule "Utils/spdlog"]
+	path = Utils/spdlog
+	url = https://github.com/Sam-1210/imgui
