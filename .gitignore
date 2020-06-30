@@ -1,0 +1,12 @@
+*.sln
+.vs/*
+*.NotLog
+imgui.ini
+*.vcxproj
+*.filters
+*.user
+bin/*
+bin-int/*
+
+Utils/GLAD/bin/*
+Utils/GLAD/bin-int/*
