@@ -62,8 +62,32 @@ void Rect2D::_process()
 
 void Rect2D::_update()
 {
-}
+	glm::vec2 ViewportSize = Application::ActiveApplication->GetViewportSize();
+	float AspectRatio = ViewportSize.x / ViewportSize.y;
+	Mat_Projection = glm::ortho(-1.0f * AspectRatio, 1.0f * AspectRatio, -1.0f, 1.0f, -1.0f, 1.0f);
+	Mat_Model = glm::mat4(1.0f);
+	Mat_Model = glm::translate(Mat_Model, glm::vec3(this->Position, 0.0f));
+	Mat_Model = glm::rotate(Mat_Model, glm::radians(this->Rotation), glm::vec3(0.0, 0.0, 1.0));
+	Mat_Model = glm::scale(Mat_Model, glm::vec3(this->Scale, 1.0f));
 
-void Rect2D::_render()
-{
+	static float u = 0.0f, r = 0.0f, speed = 0.002f, scale = 1.0f;
+
+	if (glfwGetKey(Application::ActiveApplication->GetWindowObject(), GLFW_KEY_W) == GLFW_PRESS)
+		u -= speed;
+	if (glfwGetKey(Application::ActiveApplication->GetWindowObject(), GLFW_KEY_S) == GLFW_PRESS)
+		u += speed;
+	if (glfwGetKey(Application::ActiveApplication->GetWindowObject(), GLFW_KEY_D) == GLFW_PRESS)
+		r -= speed;
+	if (glfwGetKey(Application::ActiveApplication->GetWindowObject(), GLFW_KEY_A) == GLFW_PRESS)
+		r += speed;
+	if (glfwGetKey(Application::ActiveApplication->GetWindowObject(), GLFW_KEY_DOWN) == GLFW_PRESS)
+		if (scale > 0.4f)
+			scale -= speed;
+	if (glfwGetKey(Application::ActiveApplication->GetWindowObject(), GLFW_KEY_UP) == GLFW_PRESS)
+		if (scale < 1.0f)
+			scale += speed;
+
+	Mat_View = glm::mat4(1.0f);
+	Mat_View = glm::translate(Mat_View, glm::vec3(r, u, 0.0));
+	Mat_View = glm::scale(Mat_View, glm::vec3(scale));
 }

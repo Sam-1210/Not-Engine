@@ -240,7 +240,7 @@ void Editor::MainMenuBar()
 			{
 				if (SelectedNode.node)
 				{
-					SelectedNode.node->AddChild(new ColorRect("ColorRect"));
+					SelectedNode.node->AddChild(new ColorRect());
 				}
 			}
 			if (ImGui::MenuItem("Delete"))

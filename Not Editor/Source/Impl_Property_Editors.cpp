@@ -61,7 +61,7 @@ void ColorRect::PropertyEditor()
 	if (ImGui::CollapsingHeader("ColorRect"))
 	{
 		ImGui::Checkbox("Transparent", &isTransparent);
-		float tmpVec[4] = { RectColor.r, RectColor.g, RectColor.b, RectColor.a };
+		float tmpVec[4] = { RectColor.r, RectColor.g, RectColor.b, Alpha };
 		if (ImGui::ColorEdit4("Color", tmpVec))
 			SetColor(glm::vec4(tmpVec[0], tmpVec[1], tmpVec[2], tmpVec[3]));
 

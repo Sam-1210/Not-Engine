@@ -24,8 +24,8 @@ public:
 	inline void DisableTransparency() { this->isTransparent = false; }
 
 	virtual void PropertyEditor() = 0;
-	virtual void _process() = 0;
-	virtual void _update() = 0;
+	virtual void _process();
+	virtual void _update();
 	virtual void _render() = 0;
 };
 

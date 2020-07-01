@@ -13,6 +13,8 @@ class Texture
 {
 private:
 	Flags TextureFlags;
+	bool XFlipped;
+	bool YFlipped;
 	int TexWidth, TexHeight, TexBitsPerPix;
 	std::string DataPath;
 	unsigned int ID;
@@ -32,6 +34,8 @@ public:
 	/** Loads Texture From Specified Package*/
 	~Texture();
 
+	void FlipX();
+	void FlipY();
 	void SetTextureData(const std::string& TexturePath);
 	void BindAtSlot(unsigned int Slot = 0) const;
 	void Unbind();

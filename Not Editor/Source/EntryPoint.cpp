@@ -1,6 +1,7 @@
 #include <Not Engine.h>
 #include <Windows.h>
 #include "Editor.h"
+#include "DemoScene.h"
 
 int main()
 {
@@ -23,7 +24,7 @@ int main()
 	and if values aren't null then they are called by member function in case of events
 	23. user functions are separate cpp which will be compiled with main application when dev starts application from engine.
 	24. viewport 2d and viewport 3d
-	25.
+	25. window resize issue signal to engine for update matrices
 	*/
 	Application* EditorApp = new Application("Not Editor", glm::vec2(1280, 720), glm::vec2(320, 180),
 		glm::vec2(4, 6), true, true, false, WrapperEnum::Mode_Windowed, false);
@@ -35,22 +36,8 @@ int main()
 
 	Editor* editor = Editor::InitialiseEditor(true, EditorApp);
 	Engine* eg = EditorApp->GetEngine();
-	Scene* newScene = new Scene("Testing");
-	eg->AddScene(newScene);
-	Node2D* rect = new ColorRect("Red Square", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-	Node2D* rect1 = new ColorRect("Green Square", glm::vec4(0.0f, 1.0f, 0.0f, 0.6f));
-	Node2D* rect2 = new ColorRect("Blue Square", glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
 
-	rect->SetPosition(glm::vec2(0.0f, 0.0f));
-	rect->SetScale(2.0f, 2.0f);
-	rect1->SetScale(0.5f, 0.5f);
-	rect2->SetScale(0.25f, 0.25f);
-
-	Node* root = newScene->GetSceneRoot();
-	root->AddChild(rect);
-	rect->AddChild(rect2);
-	root->AddChild(rect1);
-	root->AddChild(new TextureRect("Logo", EnginePath::TextureFolder + "NotEngine.jpg"));
+	DemoScene(eg);
 
 	while (EditorApp->WindowIsNotClosed())
 	{

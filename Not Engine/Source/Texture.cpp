@@ -1,5 +1,6 @@
 #include "Texture.h"
-#include "stb_image.h"
+#include "Log.h"
+#include <stb_image.h>
 #include <glad/glad.h>
 
 unsigned int Texture::InstanceCounter = 0;
@@ -12,6 +13,8 @@ Texture::Texture() :  TexWidth(0), TexHeight(0), TexBitsPerPix(0), ID(0), Image(
 	glBindTexture(GL_TEXTURE_2D, ID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	XFlipped = false;
+	YFlipped = false;
 }
 
 Texture::Texture(const std::string& Path) : TexWidth(0), TexHeight(0), TexBitsPerPix(0), DataPath(Path), ID(0), Image(nullptr)
@@ -39,13 +42,29 @@ Texture::~Texture()
 		FreeTextureCache();
 }
 
+void Texture::FlipX()
+{
+	XFlipped = XFlipped ? false : true;
+	//SetTexture();
+}
+
+void Texture::FlipY()
+{
+	YFlipped = YFlipped ? false : true;
+	///SetTexture();
+}
+
 void Texture::SetTexture()
 {
 	stbi_set_flip_vertically_on_load(1);
+	
 	if(Image)
 		stbi_image_free(Image);
 
 	Image = stbi_load(DataPath.c_str(), &TexWidth, &TexHeight, &TexBitsPerPix, 4);
+
+	if (!Image)
+		NE_CORE_CRITICAL("No Texture Exists at Path : " + DataPath);
 
 	int nrComponents = TexBitsPerPix;
 	GLenum format;
@@ -58,10 +77,11 @@ void Texture::SetTexture()
 	else
 		format = GL_RGBA8;
 
+	glBindTexture(GL_TEXTURE_2D, ID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, format == GL_RGBA ? GL_CLAMP_TO_EDGE : GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, format == GL_RGBA ? GL_CLAMP_TO_EDGE : GL_REPEAT);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, TexWidth, TexHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, Image);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, TexWidth, TexHeight, 0, format, GL_UNSIGNED_BYTE, Image);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }

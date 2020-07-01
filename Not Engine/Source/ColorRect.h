@@ -7,8 +7,9 @@ class Shader;
 class ColorRect : public Rect2D
 {
 private:
-	glm::vec4 RectColor;
-	std::shared_ptr<Shader> ColorShader;
+	glm::vec3 RectColor;
+	float Alpha;
+	std::shared_ptr<Shader> mShader;
 
 public:
 	ColorRect();
@@ -17,10 +18,13 @@ public:
 
 	~ColorRect() {};
 
-	inline void SetColor(const glm::vec4& NewColor) { this->RectColor = NewColor; }
+	inline void SetColor(const glm::vec3& NewColor) { this->RectColor = NewColor; }
+	inline void SetAlpha(const float& NewAlpha) { this->Alpha = NewAlpha; }
+	inline void SetColor(const glm::vec4& NewColor) { this->RectColor = glm::vec3(NewColor); this->Alpha = NewColor.a; }
 
-	inline glm::vec4 GetColor() const { return RectColor; }
-	inline std::shared_ptr<Shader> GetShader() const { return ColorShader; }
+	inline glm::vec3 GetColor() const { return RectColor; }
+	inline float GetAlpha() { return this->Alpha; }
+	inline std::shared_ptr<Shader> GetShader() const { return mShader; }
 
 	void PropertyEditor();
 	void _process();

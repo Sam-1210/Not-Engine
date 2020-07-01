@@ -89,6 +89,7 @@ MyStatus Application::Init()
 		NE_CORE_ERROR("Application Initialization Failed");
 		return MyStatus::GLAD_Init_Error;
 	}
+	EnableTransparency();
 
 	std::cout << "************ OpenGL Log ************\n";
 	std::cout << "Vendor\t\t:\t" << glGetString(GL_VENDOR) << "\n";
