@@ -2,10 +2,11 @@
 #include <Windows.h>
 #include "Editor.h"
 #include "DemoScene.h"
+#include <FrameBuffer.h>
 
 int main()
 {
-	/* To Do:
+	/* TODO:
 	1. icon
 	5. Childerns Transformations Relative to Parents
 	11. Context menu
@@ -25,6 +26,8 @@ int main()
 	23. user functions are separate cpp which will be compiled with main application when dev starts application from engine.
 	24. viewport 2d and viewport 3d
 	25. window resize issue signal to engine for update matrices
+	26. optimise framebuffer class
+	27. handle editor class members, organisse and clean code.
 	*/
 	Application* EditorApp = new Application("Not Editor", glm::vec2(1280, 720), glm::vec2(320, 180),
 		glm::vec2(4, 6), true, true, false, WrapperEnum::Mode_Windowed, false);
@@ -41,11 +44,13 @@ int main()
 
 	while (EditorApp->WindowIsNotClosed())
 	{
+		editor->EditorTmp();
 		eg->NewFrame();
 		eg->Process();
 		eg->Update();
 		eg->Render();
 		editor->Frame(eg->GetCurrentScene());
+		
 		eg->EndFrame();
 	}
 

@@ -103,6 +103,8 @@ Editor::Editor(const bool& EditMode, Application* App)
 	ImGui_ImplGlfw_InitForOpenGL(App->GetWindowObject(), true);
 	ImGui_ImplOpenGL3_Init();
 
+	ViewportFrameTexture = std::shared_ptr<FrameBuffer>(new FrameBuffer());
+
 	ChangeTheme(Theme);
 	NE_CORE_INFO("All Processes of Editor Started Successfully");
 }
@@ -160,14 +162,24 @@ void Editor::ChangeTheme(const bool& Theme)
 		ImGui::StyleColorsDark();
 }
 
+void Editor::EditorTmp()
+{
+	ViewportFrameTexture->Bind();
+}
+
 void Editor::Frame(Scene* scene)
 {
-	//ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking;
-	//window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
-	//window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
-	//static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
-	//if (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode)
-	//	window_flags |= ImGuiWindowFlags_NoBackground;
+	static ImVec2 ViewportTexSize;
+	static ImVec2 FlipTextureY_UV0(0, 1);
+	static ImVec2 FlipTextureY_UV1(1, 0);
+	static ImTextureID ViewportTexID = (void*)(void*)ViewportFrameTexture->GetColorTexture();
+	ViewportFrameTexture->Unbind();
+	ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoDocking;
+	window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+	window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+	static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
+	if (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode)
+		window_flags |= ImGuiWindowFlags_NoBackground;
 
 	ImGuiViewport* viewport = ImGui::GetMainViewport();
 	
@@ -184,15 +196,15 @@ void Editor::Frame(Scene* scene)
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
 
-	//ImGui::SetNextWindowPos(viewport->GetWorkPos());
-	//ImGui::SetNextWindowSize(viewport->GetWorkSize());
-	//ImGui::SetNextWindowViewport(viewport->ID);
-	//ImGui::Begin("Dockspace", nullptr, window_flags);
-	ImGui::Begin("Dockspace");
-	ImGui::PushStyleColor(ImGuiCol_DockingEmptyBg, ImVec4(1,0,0,0));
-	ImGui::DockSpace(ImGui::GetID("Temp"));
-	ImGui::PopStyleColor();
-	//ImGui::DockSpace(ImGui::GetID("MyDock"), ImVec2(0,0), dockspace_flags);
+	ImGui::SetNextWindowPos(viewport->GetWorkPos());
+	ImGui::SetNextWindowSize(viewport->GetWorkSize());
+	ImGui::SetNextWindowViewport(viewport->ID);
+	ImGui::Begin("Dockspace", nullptr, window_flags);
+	//ImGui::Begin("Dockspace");
+	//ImGui::PushStyleColor(ImGuiCol_DockingEmptyBg, ImVec4(1,0,0,0));
+	//ImGui::DockSpace(ImGui::GetID("Temp"));
+	//ImGui::PopStyleColor();
+	ImGui::DockSpace(ImGui::GetID("MyDock"), ImVec2(0,0), dockspace_flags);
 
 	MinColumnWidth = App->GetWindowSize().x * 0.2;
 	MaxColumnWidth = App->GetWindowSize().x * 0.3;
@@ -202,7 +214,13 @@ void Editor::Frame(Scene* scene)
 	ImGui::Begin("Rendering Info");
 	ImGui::Text("Frametime\t %.3f ms/f\nFPS\t\t %.1f", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	ImGui::End();
+
 	this->MainMenuBar();
+
+	ImGui::Begin("Viewport2D");
+	ViewportTexSize = ImGui::GetWindowSize();
+	ImGui::Image(ViewportTexID, ViewportTexSize, FlipTextureY_UV0, FlipTextureY_UV1);
+	ImGui::End();
 
 	ImGui::End();
 	ImGui::Render();

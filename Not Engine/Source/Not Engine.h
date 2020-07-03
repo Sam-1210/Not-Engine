@@ -4,6 +4,7 @@
 #include "Application.h"
 #include "Log.h"
 #include "Engine.h"
+#include "FrameBuffer.h"
 #include "Scene.h"
 #include "Node.h"
 #include "Node2D.h"

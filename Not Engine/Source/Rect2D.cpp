@@ -54,6 +54,8 @@ Rect2D::Rect2D(const std::string NodeName) : Node2D(NodeName)
 
 Rect2D::~Rect2D()
 {
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &ID);
 }
 
 void Rect2D::_process()

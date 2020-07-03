@@ -1,9 +1,11 @@
 #pragma once
 #include <string>
+#include <memory>
 
 class Node;
 
 class Application;
+class FrameBuffer;
 class Scene;
 struct SceneTreeSelectedNode;
 struct ImFont;
@@ -14,6 +16,7 @@ class Editor
 private:
 	static Editor* Instance;
 	Application* App;
+	std::shared_ptr<FrameBuffer> ViewportFrameTexture;
 	Scene* CurrentScene;
 	float MainMenuBarHeight;
 	float MinColumnWidth;
@@ -41,6 +44,7 @@ public:
 	void SetEditMode(const bool& EditMode);
 	void ChangeTheme(const bool& Theme);
 
+	void EditorTmp();
 	void Frame(Scene* scene);
 	void MainMenuBar();
 	void SceneTreeEditor();
