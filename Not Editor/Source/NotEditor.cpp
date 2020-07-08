@@ -50,7 +50,7 @@ void NotEditor::LoadEditor()
 
 	//--------------------------Initialize App------------------------------------------
 	EditorApp = new Application("Not Editor", glm::vec2(1280, 720), glm::vec2(320, 180),
-		glm::vec2(4, 6), true, true, false, WrapperEnum::Mode_Windowed, false);
+		glm::vec2(4, 6), true, false, false, WrapperEnum::Mode_Windowed, false);
 
 	MyStatus status = EditorApp->Init();
 

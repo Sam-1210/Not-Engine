@@ -117,6 +117,7 @@ void Application::SetContextCurrent(Application* App)
 void Application::ResizeWindowHandler(GLFWwindow* Window, int w, int h)
 {
 	ActiveApplication->SetWindowSize(glm::vec2(w, h));
+	ActiveApplication->SetViewportSize(glm::vec2(w, h));
 	glViewport(0, 0, w, h);
 }
 

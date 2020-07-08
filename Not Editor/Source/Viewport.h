@@ -7,6 +7,8 @@ class Viewport : public EditorComponents
 private:
 	unsigned int mWidth;
 	unsigned int mHeight;
+	unsigned int lastWidth;
+	unsigned int lastHeight;
 	FrameBuffer RenderData;
 public:
 	Viewport(NotEditor* Parent, const int& Width, const int& Height);

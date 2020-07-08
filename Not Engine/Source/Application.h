@@ -65,6 +65,7 @@ public:
 	void SetVSync(const bool& VerticalSync);
 	void SetWindowMode(WrapperEnum Mode);
 	void SetWindowSize(const glm::vec2& WinSize);
+	inline void SetViewportSize(const float& Width, const float& Height) { this->ViewportSize = glm::vec2(Width, Height); }
 	void SetViewportSize(const glm::vec2& _ViewportSize);
 	void SetWindowTitle(const std::string& Title);
 	void SetWireFrameMode(const bool& Wireframe);
