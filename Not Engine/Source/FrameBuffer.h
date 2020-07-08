@@ -1,37 +1,26 @@
 #pragma once
-#include <string>
-#include <memory>
-
-class Shader;
 
 class FrameBuffer
 {
 private:
-	unsigned int FBO;
-	unsigned int RBO;
-	unsigned int VAO;
-	unsigned int VBO;
-	unsigned int ColorTex;
-	unsigned int DepthTex;
-
-	float frameBufferCoord[24] = {
-		-1.0f,  1.0f,  0.0f, 1.0f,
-		-1.0f, -1.0f,  0.0f, 0.0f,
-		 1.0f, -1.0f,  1.0f, 0.0f,
-
-		-1.0f,  1.0f,  0.0f, 1.0f,
-		 1.0f, -1.0f,  1.0f, 0.0f,
-		 1.0f,  1.0f,  1.0f, 1.0f
-	};
-
-	std::shared_ptr<Shader> mShader;
+	unsigned int mFBO;
+	unsigned int mColorTex;
+	unsigned int mDepthTex;
+	unsigned int mWidth;
+	unsigned int mHeight;
+	void Create();
 public:
-	FrameBuffer(const std::string& ShaderName = "FrameBuffer");
+	FrameBuffer(const int& width, const int& height);
 	~FrameBuffer();
 
-	inline unsigned int GetColorTexture() { return ColorTex; }
-	inline unsigned int GetDepthTexture() { return DepthTex; }
+	inline unsigned int GetColorTexture() { return mColorTex; }
+	inline unsigned int GetDepthTexture() { return mDepthTex; }
+	inline void Resize(const int& width, const int& height) 
+	{
+		this->mWidth = width;
+		this->mHeight = height;
+		Create(); 
+	}
 	void Bind();
 	void Unbind();
-	void RenderFrameBuffer();
 };

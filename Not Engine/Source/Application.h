@@ -53,6 +53,10 @@ public:
 	GLFWwindow* GetWindowObject() const;
 	WrapperEnum GetWindowMode() const;
 	std::string GetWindowTitle() const;
+
+	inline const char* GetVendor() const { return (const char*)glGetString(GL_VENDOR); }
+	inline const char* GetRenderer() const { return (const char*)glGetString(GL_RENDERER); }
+	inline const char* GetVersion() const { return (const char*)glGetString(GL_VERSION); }
 	/*------------------------------------Setters--------------------------------------*/
 	void EnableTransparency();
 	void DisableTransparency();

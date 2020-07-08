@@ -8,6 +8,7 @@ ColorRect::ColorRect() : Rect2D("ColorRect")
 {
 	mShader = Shader::Add("ColorRect");
 	RectColor = glm::vec4(1.0);
+	Alpha = 1.0f;
 }
 
 ColorRect::ColorRect(const std::string& Name)
@@ -15,6 +16,7 @@ ColorRect::ColorRect(const std::string& Name)
 {
 	mShader = Shader::Add("ColorRect");
 	RectColor = glm::vec4(1.0);
+	Alpha = 1.0f;
 }
 
 ColorRect::ColorRect(const std::string& Name, const glm::vec4& Color)

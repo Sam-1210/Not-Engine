@@ -4,7 +4,7 @@
 
 void DemoScene(Engine* eg)
 {
-	Scene* newScene = new Scene("Testing");
+	std::shared_ptr<Scene> newScene(new Scene("Testing"));
 	eg->AddScene(newScene);
 
 	Node* root = newScene->GetSceneRoot();

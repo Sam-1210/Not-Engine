@@ -1,9 +1,6 @@
 #include <Not Engine.h>
 #include <imgui.h>
-#include <imgui_impl_opengl3.h>
-#include <imgui_impl_glfw.h>
 #include <imgui_stdlib.h>
-#include "Editor.h"
 
 void Node::PropertyEditor()
 {
@@ -83,7 +80,7 @@ void TextureRect::PropertyEditor()
 		isNotCollapsed = true;
 		ImGui::Text("Preview Texture");
 		ImTextureID TexPreview = (void*)TextureData->GetTextureID();
-		ImVec2 PanelSize = ImVec2(Editor::GetInstance()->GetRightPanelWidth() * 0.8, Editor::GetInstance()->GetRightPanelWidth() * 0.8);
+		ImVec2 PanelSize = ImVec2(100.0f, 100.0f);
 		ImGui::SetCursorPos(ImVec2((ImGui::GetWindowSize().x - PanelSize.x) / 2, ImGui::GetCursorPos().y));
 		if (ImGui::ImageButton(TexPreview, PanelSize, ImVec2(0, 1), ImVec2(1, 0), 2, ImVec4(0.0f, 0.0f, 0.0f, 1.0f)))
 		{ }

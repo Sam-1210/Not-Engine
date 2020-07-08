@@ -91,11 +91,11 @@ MyStatus Application::Init()
 	}
 	EnableTransparency();
 
-	std::cout << "************ OpenGL Log ************\n";
+	std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Driver Info ~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 	std::cout << "Vendor\t\t:\t" << glGetString(GL_VENDOR) << "\n";
 	std::cout << "Renderer\t:\t" << glGetString(GL_RENDERER) << "\n";
 	std::cout << "OpenGL Version\t:\t" << glGetString(GL_VERSION) << "\n";
-	std::cout << "************************************\n\n";
+	std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
 	NE_CORE_INFO("Window \'" + WindowTitle + "\' Created Successfully");
 	NE_CORE_INFO("Application Initialized Successfully, Instance ID {0}", ID);
 

@@ -25,14 +25,12 @@ Engine::Engine(const int& EngineID, Application* App)
 
 Engine::~Engine()
 {
-	for (Scene* s : Scenes)
-		delete s;
 }
 
-void Engine::AddScene(Scene* s)
+void Engine::AddScene(std::shared_ptr<Scene> sc)
 {
-	Scenes.push_back(s);
-	NE_CORE_INFO("Added Scene : " + s->GetSceneName());
+	Scenes.push_back(sc);
+	NE_CORE_INFO("Added Scene : " + sc->GetSceneName());
 }
 
 void Engine::RemoveScene(const unsigned int& Index)

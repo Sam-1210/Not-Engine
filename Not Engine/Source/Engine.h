@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include <vector>
 
 class Application;
@@ -14,16 +15,16 @@ protected:
 	double LastFrame;
 	
 	unsigned int DefaultScene;
-	std::vector<Scene*> Scenes;
+	std::vector<std::shared_ptr<Scene>> Scenes;
 
 	virtual void DelayFix();
 public:
 	Engine(const int& ID, Application* App);
 	~Engine();
 	
-	inline Scene* GetCurrentScene() const { return Scenes[Scenes.size() - 1];  }
+	inline std::shared_ptr<Scene> GetCurrentScene() const { return Scenes[Scenes.size() - 1];  }
 
-	virtual void AddScene(Scene* s);
+	virtual void AddScene(std::shared_ptr<Scene> sc);
 	virtual void RemoveScene(const unsigned int& Index);
 
 	virtual void NewFrame();

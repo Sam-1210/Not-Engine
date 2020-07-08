@@ -24,7 +24,7 @@ public:
 		isProcess will determine whether Process() to be ticked per frame*/
 	Node(const std::string& NodeName, const bool& isVisible, const bool& isProcess = false);
 
-	~Node();
+	virtual ~Node();
 
 	virtual void PropertyEditor();
 	virtual void _process();
