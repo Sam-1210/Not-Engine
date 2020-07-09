@@ -89,12 +89,13 @@ MyStatus Application::Init()
 		NE_CORE_ERROR("Application Initialization Failed");
 		return MyStatus::GLAD_Init_Error;
 	}
+	EnableTransparency();
 
-	std::cout << "************ OpenGL Log ************\n";
+	std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Driver Info ~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 	std::cout << "Vendor\t\t:\t" << glGetString(GL_VENDOR) << "\n";
 	std::cout << "Renderer\t:\t" << glGetString(GL_RENDERER) << "\n";
 	std::cout << "OpenGL Version\t:\t" << glGetString(GL_VERSION) << "\n";
-	std::cout << "************************************\n\n";
+	std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
 	NE_CORE_INFO("Window \'" + WindowTitle + "\' Created Successfully");
 	NE_CORE_INFO("Application Initialized Successfully, Instance ID {0}", ID);
 
@@ -116,6 +117,7 @@ void Application::SetContextCurrent(Application* App)
 void Application::ResizeWindowHandler(GLFWwindow* Window, int w, int h)
 {
 	ActiveApplication->SetWindowSize(glm::vec2(w, h));
+	ActiveApplication->SetViewportSize(glm::vec2(w, h));
 	glViewport(0, 0, w, h);
 }
 

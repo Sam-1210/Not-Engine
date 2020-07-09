@@ -53,6 +53,10 @@ public:
 	GLFWwindow* GetWindowObject() const;
 	WrapperEnum GetWindowMode() const;
 	std::string GetWindowTitle() const;
+
+	inline const char* GetVendor() const { return (const char*)glGetString(GL_VENDOR); }
+	inline const char* GetRenderer() const { return (const char*)glGetString(GL_RENDERER); }
+	inline const char* GetVersion() const { return (const char*)glGetString(GL_VERSION); }
 	/*------------------------------------Setters--------------------------------------*/
 	void EnableTransparency();
 	void DisableTransparency();
@@ -61,6 +65,7 @@ public:
 	void SetVSync(const bool& VerticalSync);
 	void SetWindowMode(WrapperEnum Mode);
 	void SetWindowSize(const glm::vec2& WinSize);
+	inline void SetViewportSize(const float& Width, const float& Height) { this->ViewportSize = glm::vec2(Width, Height); }
 	void SetViewportSize(const glm::vec2& _ViewportSize);
 	void SetWindowTitle(const std::string& Title);
 	void SetWireFrameMode(const bool& Wireframe);

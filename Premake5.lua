@@ -101,7 +101,7 @@ project "Not Editor"
 
     files 
 	{ 
-		"%{prj.name}/Source/**.h",
+		"%{prj.name}/Source/**.h" ,
 		"%{prj.name}/Source/**.cpp" ,
 		"Utils/GLM/glm/**.hpp",
 		"Utils/GLM/glm/**.inl",

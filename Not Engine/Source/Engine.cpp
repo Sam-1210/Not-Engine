@@ -25,14 +25,12 @@ Engine::Engine(const int& EngineID, Application* App)
 
 Engine::~Engine()
 {
-	for (Scene* s : Scenes)
-		delete s;
 }
 
-void Engine::AddScene(Scene* s)
+void Engine::AddScene(std::shared_ptr<Scene> sc)
 {
-	Scenes.push_back(s);
-	NE_CORE_INFO("Added Scene : " + s->GetSceneName());
+	Scenes.push_back(sc);
+	NE_CORE_INFO("Added Scene : " + sc->GetSceneName());
 }
 
 void Engine::RemoveScene(const unsigned int& Index)
@@ -44,7 +42,7 @@ void Engine::RemoveScene(const unsigned int& Index)
 void Engine::NewFrame()
 {
 	this->DelayFix();
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	glClearColor(0.4f, 0.4f, 1.0f, 1.0f);
 }
 
