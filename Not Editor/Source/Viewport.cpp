@@ -24,6 +24,7 @@ void Viewport::Ready()
 void Viewport::Render()
 {
 	RenderData.Unbind();
+	
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
 	ImGui::Begin("Viewport");
 

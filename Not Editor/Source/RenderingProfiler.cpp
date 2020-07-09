@@ -3,7 +3,8 @@
 #include <Application.h>
 #include <imgui.h>
 
-RenderingProfiler::RenderingProfiler(NotEditor* Parent) : EditorComponents(Parent)
+RenderingProfiler::RenderingProfiler(NotEditor* Parent) 
+	: EditorComponents(Parent), flags({true, 0, 0})
 {
 	Vendor = mParent->GetApp()->GetVendor();
 	Renderer = mParent->GetApp()->GetRenderer();
@@ -20,7 +21,12 @@ void RenderingProfiler::Ready()
 
 void RenderingProfiler::Render()
 {
-	ImGui::Begin("Rendering Profiler");
+	if (!flags.visible)
+		return;
+
+	ImGui::Begin("Rendering Profiler", &flags.visible);
+	flags.width = ImGui::GetWindowSize().x;
+	flags.height = ImGui::GetWindowSize().y;
 
 	ImGui::Text("Performance Profiler :\n\n");
 	ImGui::Text("Vertices :\t");

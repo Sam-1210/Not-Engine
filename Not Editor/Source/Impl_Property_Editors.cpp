@@ -80,7 +80,7 @@ void TextureRect::PropertyEditor()
 		isNotCollapsed = true;
 		ImGui::Text("Preview Texture");
 		ImTextureID TexPreview = (void*)TextureData->GetTextureID();
-		ImVec2 PanelSize = ImVec2(100.0f, 100.0f);
+		ImVec2 PanelSize = ImVec2(ImGui::GetWindowSize().x * 0.6, ImGui::GetWindowSize().x * 0.6);
 		ImGui::SetCursorPos(ImVec2((ImGui::GetWindowSize().x - PanelSize.x) / 2, ImGui::GetCursorPos().y));
 		if (ImGui::ImageButton(TexPreview, PanelSize, ImVec2(0, 1), ImVec2(1, 0), 2, ImVec4(0.0f, 0.0f, 0.0f, 1.0f)))
 		{ }

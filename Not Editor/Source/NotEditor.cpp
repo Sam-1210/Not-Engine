@@ -10,6 +10,7 @@
 
 #include <filesystem>
 #include <imgui.h>
+#include <imgui_internal.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 #include <Not Engine.h>
@@ -123,11 +124,32 @@ void NotEditor::Render()
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
 
+	static int count = 0;
+	ImGuiID dockspace_id = ImGui::GetID("MyID");
+	bool dockSpaceCreated = ImGui::DockBuilderGetNode(dockspace_id) != nullptr;
+	if (!dockSpaceCreated)
+	{
+		ImGui::DockBuilderRemoveNode(dockspace_id);
+		ImGui::DockBuilderAddNode(dockspace_id, ImGuiDockNodeFlags_DockSpace);
+		ImGui::DockBuilderSetNodeSize(dockspace_id, viewport->GetWorkSize());
+
+		ImGuiID dock_main_id = dockspace_id;
+		ImGuiID dock_id_left = ImGui::DockBuilderSplitNode(dock_main_id, ImGuiDir_Left, 0.20f, NULL, &dock_main_id);
+		ImGuiID dock_id_right = ImGui::DockBuilderSplitNode(dock_main_id, ImGuiDir_Right, 0.30f, NULL, &dock_main_id);
+		ImGuiID dock_id_bottom = ImGui::DockBuilderSplitNode(dock_main_id, ImGuiDir_Down, 0.20f, NULL, &dock_main_id);
+
+		ImGui::DockBuilderDockWindow("Scene Tree", dock_id_left);
+		ImGui::DockBuilderDockWindow("Viewport", dock_main_id);
+		ImGui::DockBuilderDockWindow("Rendering Profiler", dock_id_bottom);
+		ImGui::DockBuilderDockWindow("Property Editor", dock_id_right);
+		ImGui::DockBuilderFinish(dockspace_id);
+	}
+
 	ImGui::SetNextWindowPos(viewport->GetWorkPos());
 	ImGui::SetNextWindowSize(viewport->GetWorkSize());
 	ImGui::SetNextWindowViewport(viewport->ID);
 	ImGui::Begin("Dockspace", nullptr, dock_flags);
-	ImGui::DockSpace(ImGui::GetID("MyDock"), ImVec2(0, 0));
+	ImGui::DockSpace(dockspace_id, ImVec2(0, 0));
 
 	for (auto components : MainComponents)
 		components.second->Render();

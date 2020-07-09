@@ -22,8 +22,18 @@ void MenuBar::Render()
 
 	if (ImGui::BeginMenuBar())
 	{
-		if (ImGui::BeginMenu("File"))
+		if (ImGui::BeginMenu("Scene"))
 		{
+			if (ImGui::MenuItem("New Scene", "Ctr+N")) {}
+			if (ImGui::MenuItem("Open Scene", "Ctr+O")) {}
+			if (ImGui::MenuItem("Open Recent")) {}
+			ImGui::Separator();
+			if (ImGui::MenuItem("Save Scene", "Ctr+S")) {}
+			if (ImGui::MenuItem("Save All Scene", "Ctr+Alt+S")) {}
+			ImGui::Separator();
+			if (ImGui::MenuItem("Close Scene","Alt+C")) {}
+			if (ImGui::MenuItem("Close All Scene", "Alt+Shift+C")) {}
+			ImGui::Separator();
 			if (ImGui::MenuItem("Exit", "Alt+F4"))
 				mParent->GetApp()->Exit();
 			ImGui::EndMenu();
@@ -38,7 +48,12 @@ void MenuBar::Render()
 			}
 			ImGui::EndMenu();
 		}
-		if (ImGui::BeginMenu("Editor"))
+		if (ImGui::BeginMenu("View"))
+		{
+			if (ImGui::MenuItem("Rendering Profiler", nullptr, &mParent->GetComponent("RenderingProfiler")->GetFlag_Visible())) { }
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("Options"))
 		{
 			if (ImGui::BeginMenu("Theme"))
 			{

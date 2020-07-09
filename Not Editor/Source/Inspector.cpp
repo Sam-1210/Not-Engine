@@ -3,7 +3,7 @@
 #include <Node.h>
 #include <imgui.h>
 
-Inspector::Inspector(NotEditor* Parent) : EditorComponents(Parent), mSelection(Parent->GetSelection())
+Inspector::Inspector(NotEditor* Parent) : EditorComponents(Parent), flags({true, 0, 0}), mSelection(Parent->GetSelection())
 {
 }
 
@@ -20,7 +20,11 @@ void Inspector::Render()
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
 	ImGui::PushStyleColor(ImGuiCol_ResizeGrip, 0);
 
-	ImGui::Begin("Property Editor", nullptr);
+	ImGui::Begin("Property Editor");
+
+	flags.width = ImGui::GetWindowSize().x;
+	flags.height = ImGui::GetWindowSize().y;
+
 	if (mSelection.node)
 		mSelection.node->PropertyEditor();
 

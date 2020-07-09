@@ -51,7 +51,7 @@ void SceneTree::CreateTree(Node* node)
 	}
 }
 
-SceneTree::SceneTree(NotEditor* Parent) : EditorComponents(Parent), mSelection(Parent->GetSelection())
+SceneTree::SceneTree(NotEditor* Parent) : EditorComponents(Parent), flags({true, 0, 0}), mSelection(Parent->GetSelection())
 {
 }
 
@@ -69,8 +69,9 @@ void SceneTree::Render()
 	static std::shared_ptr<ConfirmDialogue> Confirmation = std::dynamic_pointer_cast<ConfirmDialogue>(mParent->GetUtility("ConfirmDialogue"));
 
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-
-	ImGui::Begin("Scene Tree", nullptr);
+	ImGui::Begin("Scene Tree");
+	flags.width = ImGui::GetWindowSize().x;
+	flags.height = ImGui::GetWindowSize().y;
 
 	ImGui::Separator();
 	if (ImGui::Button("Add (+)") && mSelection.node)
