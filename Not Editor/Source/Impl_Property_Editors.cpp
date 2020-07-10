@@ -39,15 +39,15 @@ void Node2D::PropertyEditor()
 	{
 		float tmpVec[2] = { Position.x, Position.y };
 
-		if (ImGui::DragFloat2("Position", tmpVec))
+		if (ImGui::DragFloat2("Position", tmpVec, 0.01f))
 			SetPosition(glm::vec2(tmpVec[0], tmpVec[1]));
 
 		tmpVec[0] = Scale.x;
 		tmpVec[1] = Scale.y;
-		if (ImGui::DragFloat2("Scale", tmpVec))
+		if (ImGui::DragFloat2("Scale", tmpVec, 0.01f))
 			SetScale(glm::vec2(tmpVec[0], tmpVec[1]));
 		tmpVec[0] = glm::radians(Rotation);
-		if (ImGui::SliderAngle("Rotate", tmpVec), -180.0f, 180.0f)
+		if (ImGui::DragFloat("Rotate", tmpVec, 1.0f, -180.0f, 180.0f))
 			SetRotation(glm::degrees(tmpVec[0]));
 		HeaderOpened = true;
 	}
