@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <string>
 #include <vector>
 
 class Application;
@@ -25,6 +26,9 @@ public:
 	inline std::shared_ptr<Scene> GetCurrentScene() const { return Scenes[Scenes.size() - 1];  }
 
 	virtual void AddScene(std::shared_ptr<Scene> sc);
+	virtual void SaveCurrentScene();
+	virtual void SaveAllScenes();
+	virtual void LoadScene(const std::string& Path);
 	virtual void RemoveScene(const unsigned int& Index);
 
 	virtual void NewFrame();

@@ -1,4 +1,5 @@
 #pragma once
+#include <fstream>
 #include <string>
 #include <vector>
 #include "Global.h"
@@ -8,10 +9,12 @@ class Node
 protected:
 	bool Visible;
 	bool Process;
+	unsigned long long ID;
 	Node* Parent;
 	std::string Name;
 	std::vector<Node*> Childrens;
 
+	static unsigned long long counter;
 public:
 	/** Creates Node with default name "Node" */
 	Node();
@@ -27,6 +30,8 @@ public:
 	virtual ~Node();
 
 	virtual void PropertyEditor();
+	virtual void Save(std::ofstream& SceneFile);
+	virtual void Load(std::ifstream& SceneFile);
 	virtual void _process();
 	virtual void _update();
 	virtual void _render();
@@ -34,6 +39,8 @@ public:
 	inline bool isVisible() const { return this->Visible; }
 	inline void Hide() { this->Visible = false; }
 	inline void Show() { this->Visible = true; }
+	inline void SetVisible(const bool& _isVisible) { this->Visible = _isVisible; }
+	inline void SetID(const unsigned long long& newID) { this->ID = newID; }
 
 	void Rename(std::string&& NewName);
 	void DeleteSelf();
@@ -45,6 +52,7 @@ public:
 	MyStatus Reparent(Node* NewParent);
 
 	inline unsigned int GetChildrenCount() { return this->Childrens.size(); }
+	inline unsigned long long int GetID() { return ID; }
 	inline Node* GetChild(const unsigned int& Index) const { return this->Childrens[Index]; }
 	inline std::string GetNodeName() const { return this->Name; }
 	inline std::vector<Node*>& GetChildrens() { return this->Childrens; }

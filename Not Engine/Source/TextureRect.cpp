@@ -1,5 +1,6 @@
 #include "TextureRect.h"
 #include "Application.h"
+#include "ResourceLoader.h"
 #include <glad/glad.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <GLFW/glfw3.h>
@@ -26,6 +27,28 @@ TextureRect::TextureRect(const std::string& Name, const std::string& TexturePath
 
 TextureRect::~TextureRect()
 {
+}
+
+void TextureRect::Save(std::ofstream& SceneFile)
+{
+	SceneFile << "[ " << "TextureRect" << " ] ";
+	if (Parent)
+		SceneFile << Parent->GetID() << " ";
+	SceneFile << "[ " << Name << " ] ";
+	SceneFile << ID << " ";
+	SceneFile << Visible << " ";
+	SceneFile << Rotation << " ";
+	SceneFile << Position.x << " " << Position.y << " ";
+	SceneFile << Scale.x << " " << Scale.y << " ";
+	SceneFile << "[ "<< TextureData->GetImagePath() << " ]";
+	SceneFile << "\n";
+}
+
+void TextureRect::Load(std::ifstream& SceneFile)
+{
+	Node2D::Load(SceneFile);
+	std::string TexturePath = ResouceLoader::NameParser(SceneFile);
+	ChangeTexture(TexturePath);
 }
 
 void TextureRect::_process()

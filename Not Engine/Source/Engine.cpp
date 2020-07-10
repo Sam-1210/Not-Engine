@@ -2,7 +2,9 @@
 #include "Application.h"
 #include "Log.h"
 #include "Node.h"
+#include "ResourceLoader.h"
 #include "Scene.h"
+#include <fstream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -31,6 +33,32 @@ void Engine::AddScene(std::shared_ptr<Scene> sc)
 {
 	Scenes.push_back(sc);
 	NE_CORE_INFO("Added Scene : " + sc->GetSceneName());
+}
+
+void Engine::SaveCurrentScene()
+{
+	NE_CORE_INFO("Saving Current Scene");
+	std::ofstream SceneFile("./Assets/Scenes/" + GetCurrentScene()->GetSceneName() + ".nsc");
+	Scene::SaveScene(GetCurrentScene()->GetSceneRoot(), SceneFile);
+	SceneFile.close();
+	NE_CORE_INFO("Saving Current Scene Finished Successfully.");
+}
+
+void Engine::SaveAllScenes()
+{
+	NE_CORE_INFO("Saving All Scenes");
+	for (auto child : Scenes)
+	{
+		std::ofstream SceneFile(child->GetSceneName() + ".nsc");
+		Scene::SaveScene(child->GetSceneRoot(), SceneFile);
+		SceneFile.close();
+	}
+	NE_CORE_INFO("Saving Scenes Finished Successfully.");
+}
+
+void Engine::LoadScene(const std::string& Path)
+{
+	ResouceLoader::LoadScene(Path);
 }
 
 void Engine::RemoveScene(const unsigned int& Index)

@@ -27,6 +27,29 @@ ColorRect::ColorRect(const std::string& Name, const glm::vec4& Color)
 	this->Alpha = Color.a;
 }
 
+void ColorRect::Save(std::ofstream& SceneFile)
+{
+	SceneFile << "[ " << "ColorRect" << " ] ";
+	if (Parent)
+		SceneFile << Parent->GetID() << " ";
+	SceneFile << "[ " << Name << " ] ";
+	SceneFile << ID << " ";
+	SceneFile << Visible << " ";
+
+	SceneFile << Rotation << " ";
+	SceneFile << Position.x << " " << Position.y << " ";
+	SceneFile << Scale.x << " " << Scale.y << " ";
+	SceneFile << RectColor.r << " " << RectColor.g << " " << RectColor.b << " ";
+	SceneFile << Alpha;
+	SceneFile << "\n";
+}
+
+void ColorRect::Load(std::ifstream& SceneFile)
+{
+	Node2D::Load(SceneFile);
+	SceneFile >> RectColor.r >> RectColor.g >> RectColor.b >> Alpha;
+}
+
 void ColorRect::_process()
 {
 	Rect2D::_process();

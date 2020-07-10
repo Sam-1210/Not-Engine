@@ -1,6 +1,7 @@
 #pragma once
 #include "Node2D.h"
 #include "Node3D.h"
+#include <fstream>
 
 class Scene
 {
@@ -13,9 +14,9 @@ public:
 	~Scene();
 
 	//ChangeScene();
-	//ReloadScene();
-	//SaveScene();
-	//LoadScene();
+	//static void ReloadScene(Node* node);
+	static void SaveScene(Node* node, std::ofstream& SceneFile);
+	void Load(std::ifstream& SceneFile);
 
 	inline Node* GetSceneRoot() { return this->SceneRoot; }
 	inline std::string GetSceneName() const { return this->SceneName; }

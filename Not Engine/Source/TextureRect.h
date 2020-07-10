@@ -23,6 +23,8 @@ public:
 
 	void PropertyEditor();
 
+	void Save(std::ofstream& SceneFile) override;
+	void Load(std::ifstream& SceneFile) override;
 	void _process();
 	void _update();
 	void _render();

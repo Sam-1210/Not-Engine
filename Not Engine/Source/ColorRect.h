@@ -26,8 +26,10 @@ public:
 	inline float GetAlpha() { return this->Alpha; }
 	inline std::shared_ptr<Shader> GetShader() const { return mShader; }
 
-	void PropertyEditor();
-	void _process();
-	void _update();
-	void _render();
+	void PropertyEditor() override;
+	void Save(std::ofstream& SceneFile) override;
+	void Load(std::ifstream& SceneFile) override;
+	void _process() override;
+	void _update() override;
+	void _render() override;
 };
