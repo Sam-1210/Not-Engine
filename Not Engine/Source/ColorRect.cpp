@@ -29,10 +29,10 @@ ColorRect::ColorRect(const std::string& Name, const glm::vec4& Color)
 
 void ColorRect::Save(std::ofstream& SceneFile)
 {
-	SceneFile << "ColorRect ";
+	SceneFile << "[ " << "ColorRect" << " ] ";
 	if (Parent)
 		SceneFile << Parent->GetID() << " ";
-	SceneFile << Name << " ";
+	SceneFile << "[ " << Name << " ] ";
 	SceneFile << ID << " ";
 	SceneFile << Visible << " ";
 

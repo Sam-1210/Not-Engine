@@ -17,7 +17,7 @@ void Scene::SaveScene(Node* node, std::ofstream& SceneFile)
 	for (auto child : node->GetChildrens())
 		SaveScene(child, SceneFile);
 }
-#include "Log.h"
+
 void Scene::Load(std::ifstream& SceneFile)
 {
 	bool SceneVisiblity;

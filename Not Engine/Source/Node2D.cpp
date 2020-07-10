@@ -24,10 +24,10 @@ Node2D::Node2D(const std::string NodeName, const bool& isVisible, const bool& is
 
 void Node2D::Save(std::ofstream& SceneFile)
 {
-	SceneFile << "Node2D ";
+	SceneFile << "[ " << "Node2D" << " ] ";
 	if (Parent)
 		SceneFile << Parent->GetID() << " ";
-	SceneFile << Name << " ";
+	SceneFile << "[ " << Name << " ] ";
 	SceneFile << ID << " ";
 	SceneFile << Visible << " ";
 	SceneFile << Rotation << " ";

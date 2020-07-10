@@ -16,5 +16,6 @@ namespace ResouceLoader
 	};
 	ParsedNode NodeParser(std::ifstream& SceneFile);
 	Node* FindNode(Node* node, const int& ID);
+	std::string NameParser(std::ifstream& SceneFile);
 	std::shared_ptr<Scene> LoadScene(const std::string& Path);
 }

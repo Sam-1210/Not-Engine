@@ -9,9 +9,9 @@ ResouceLoader::ParsedNode ResouceLoader::NodeParser(std::ifstream& SceneFile)
 	std::string type;
 	std::string name;
 
-	SceneFile >> type;
+	type = NameParser(SceneFile);
 	SceneFile >> pID;
-	SceneFile >> name;
+	name = NameParser(SceneFile);
 
 	if (type == "Node")
 	{
@@ -51,9 +51,34 @@ Node* ResouceLoader::FindNode(Node* node, const int& ID)
 	return found;
 }
 
+std::string ResouceLoader::NameParser(std::ifstream& SceneFile)
+{
+	std::string ParsedVar;
+	std::string FullVar("");
+
+	SceneFile >> ParsedVar;		//first char is '[', indicates start of block,
+	
+	if (ParsedVar == "")		//if nothing is read, then it's eof
+		return ParsedVar;
+	if (ParsedVar != "[")
+		NE_CORE_CRITICAL("Scene File is Corrupt.");
+
+	SceneFile >> ParsedVar;
+	while (ParsedVar != "]")
+	{
+		FullVar += ParsedVar;
+		FullVar += " ";
+		SceneFile >> ParsedVar;
+	}
+	FullVar.pop_back();
+	//FullVar[FullVar.size() - 1] = '\0';	// Removes white space at the end of parsedvar
+	return FullVar;
+}
+
 std::shared_ptr<Scene> ResouceLoader::LoadScene(const std::string& Path)
 {
 	// Scene File Format : NodeType ParentID NodeName Visible __VA_ARGS_OF_DIFFERENT_NODES__
+
 	NE_CORE_INFO("Loading Scene From : {0}", Path);
 	std::ifstream SceneFile(Path);
 	std::shared_ptr<Scene> LoadedScene;
@@ -61,14 +86,14 @@ std::shared_ptr<Scene> ResouceLoader::LoadScene(const std::string& Path)
 	if (SceneFile.is_open())
 	{
 		std::string SceneName;
-		SceneFile >> SceneName; //first word is type, which doesn't matter as of now for Scenes
+		SceneName = NameParser(SceneFile); //first word is type, which doesn't matter as of now for Scenes
 		//second is Parent ID, which does not exist in case of Scenes
-		SceneFile >> SceneName;
+		SceneName = NameParser(SceneFile);
 
 		LoadedScene = std::shared_ptr<Scene>(new Scene(SceneName));
 		LoadedScene->Load(SceneFile);
 
-		while(!SceneFile.eof())
+		while(SceneFile.good())
 		{
 			ParsedNode pn = NodeParser(SceneFile);
 			Node* Parent = FindNode(LoadedScene->GetSceneRoot(), pn.ParentID);

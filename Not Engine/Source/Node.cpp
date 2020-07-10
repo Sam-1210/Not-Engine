@@ -43,10 +43,10 @@ Node::~Node()
 
 void Node::Save(std::ofstream& SceneFile)
 {
-	SceneFile << "Node ";
+	SceneFile << "[ "<< "Node" << " ] ";
 	if (Parent)
 		SceneFile << Parent->GetID() << " ";
-	SceneFile << Name << " ";
+	SceneFile << "[ " << Name << " ] ";
 	SceneFile << ID << " ";
 	SceneFile << Visible;
 	SceneFile << "\n";
