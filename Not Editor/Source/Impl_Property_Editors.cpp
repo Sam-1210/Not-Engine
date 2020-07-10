@@ -1,3 +1,7 @@
+#include "..\..\Not Engine\Source\ColorRect.h"
+#include "..\..\Not Engine\Source\ColorRect.h"
+#include "..\..\Not Engine\Source\Node.h"
+#include "..\..\Not Engine\Source\Node.h"
 #include <Not Engine.h>
 #include <imgui.h>
 #include <imgui_stdlib.h>
@@ -9,6 +13,8 @@ void Node::PropertyEditor()
 	if (ImGui::CollapsingHeader("Node"))
 	{
 		std::string tmp = Name;
+		std::string sID = std::to_string(ID);
+		ImGui::Text("ID :\t"); ImGui::SameLine(); ImGui::Text(sID.c_str());
 		if (ImGui::InputText("Name", &tmp, ImGuiInputTextFlags_EnterReturnsTrue))
 		{
 			if (tmp.size())

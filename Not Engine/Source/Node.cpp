@@ -4,11 +4,15 @@
 #define ErrNoParentString "There's No Parent for This Node"
 #define ErrIndexOutOfBoundsString "Index Out of Bounds"
 
+unsigned long long Node::counter = 0;
+
 Node::Node()
 {
 	this->Name = "Node";
 	Visible = true;
 	Process = false;
+	Parent = nullptr;
+	ID = ++counter;
 }
 
 Node::Node(const std::string& NodeName)
@@ -16,6 +20,8 @@ Node::Node(const std::string& NodeName)
 	this->Name = NodeName;
 	Visible = true;
 	Process = true;
+	Parent = nullptr;
+	ID = ++counter;
 }
 
 Node::Node(const std::string& NodeName, const bool& isVisible, const bool& isProcess)
@@ -23,6 +29,8 @@ Node::Node(const std::string& NodeName, const bool& isVisible, const bool& isPro
 	this->Name = NodeName;
 	this->Visible = isVisible;
 	this->Process = isProcess;
+	Parent = nullptr;
+	ID = ++counter;
 }
 
 Node::~Node()
@@ -31,6 +39,22 @@ Node::~Node()
 	{
 		delete node;
 	}
+}
+
+void Node::Save(std::ofstream& SceneFile)
+{
+	SceneFile << "Node ";
+	if (Parent)
+		SceneFile << Parent->GetID() << " ";
+	SceneFile << Name << " ";
+	SceneFile << ID << " ";
+	SceneFile << Visible;
+	SceneFile << "\n";
+}
+
+void Node::Load(std::ifstream& SceneFile)
+{
+	SceneFile >> ID >> Visible;
 }
 
 void Node::_process()

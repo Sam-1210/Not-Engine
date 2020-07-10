@@ -28,6 +28,29 @@ TextureRect::~TextureRect()
 {
 }
 
+void TextureRect::Save(std::ofstream& SceneFile)
+{
+	SceneFile << "TextureRect ";
+	if (Parent)
+		SceneFile << Parent->GetID() << " ";
+	SceneFile << Name << " ";
+	SceneFile << ID << " ";
+	SceneFile << Visible << " ";
+	SceneFile << Rotation << " ";
+	SceneFile << Position.x << " " << Position.y << " ";
+	SceneFile << Scale.x << " " << Scale.y << " ";
+	SceneFile << TextureData->GetImagePath();
+	SceneFile << "\n";
+}
+
+void TextureRect::Load(std::ifstream& SceneFile)
+{
+	Node2D::Load(SceneFile);
+	std::string TexturePath;
+	SceneFile >> TexturePath;
+	ChangeTexture(TexturePath);
+}
+
 void TextureRect::_process()
 {
 }

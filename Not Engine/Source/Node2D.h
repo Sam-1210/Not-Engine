@@ -25,4 +25,6 @@ public:
 	inline glm::vec2 GetScale() const { return this->Scale; }
 	
 	virtual void PropertyEditor();
+	void Save(std::ofstream& SceneFile) override;
+	void Load(std::ifstream& SceneFile) override;
 };

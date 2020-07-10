@@ -8,7 +8,7 @@ protected:
 	//Texture tex;
 	//Mesh mesh;
 	static bool BuffersSet;
-	static unsigned int ID;
+	static unsigned int VBO;
 	static unsigned int VAO;
 	static float vertices[24];
 	glm::mat4 Mat_Model;

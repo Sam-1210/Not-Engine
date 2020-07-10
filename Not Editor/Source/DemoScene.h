@@ -1,12 +1,18 @@
 #pragma once
 #include <Not Engine.h>
+#include <filesystem>
 #include <string>
 
 void DemoScene(Engine* eg)
 {
-	std::shared_ptr<Scene> newScene(new Scene("Testing"));
-	eg->AddScene(newScene);
+	if (std::filesystem::exists("DemoScene.nsc"))
+	{
+		eg->AddScene(ResouceLoader::LoadScene("DemoScene.nsc"));
+		return;
+	}
 
+	std::shared_ptr<Scene> newScene(new Scene("DemoScene"));
+	eg->AddScene(newScene);
 	Node* root = newScene->GetSceneRoot();
 
 	Node2D* BG = new TextureRect("BG", EnginePath::TextureFolder + "bg.png");
@@ -22,14 +28,14 @@ void DemoScene(Engine* eg)
 	Friend->SetScale(0.5f, 0.5f);
 
 	root->AddChild(BG);
-	root->AddChild(Group);
 	root->AddChild(Player);
 	root->AddChild(Friend);
+	root->AddChild(Group);
 	root->AddChild(Group1);
 
 	for (int i = 0; i < 3; i++)
 	{
-		Node2D* Enemy = new TextureRect("Enemy1", EnginePath::TextureFolder + "enemy" + std::to_string(i) + ".png");
+		Node2D* Enemy = new TextureRect("Enemy", EnginePath::TextureFolder + "enemy" + std::to_string(i) + ".png");
 		Enemy->SetScale(0.5f, 0.5f);
 		Enemy->SetPosition(1.0f, 0.5f - (0.6f * i));
 		Group->AddChild(Enemy);
@@ -43,4 +49,5 @@ void DemoScene(Engine* eg)
 		Group1->AddChild(Box);
 	}
 	
+	int i = 500;
 }

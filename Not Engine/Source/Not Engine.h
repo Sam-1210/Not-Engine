@@ -10,5 +10,6 @@
 #include "Node2D.h"
 #include "Node3D.h"
 #include "Rect2D.h"
+#include "ResourceLoader.h"
 #include "ColorRect.h"
 #include "TextureRect.h"

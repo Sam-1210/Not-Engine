@@ -1,6 +1,7 @@
 #include "MenuBar.h"
 #include "NotEditor.h"
 #include <Application.h>
+#include <Engine.h>
 #include <imgui.h>
 
 MenuBar::MenuBar(NotEditor* Parent) : EditorComponents(Parent)
@@ -28,7 +29,10 @@ void MenuBar::Render()
 			if (ImGui::MenuItem("Open Scene", "Ctr+O")) {}
 			if (ImGui::MenuItem("Open Recent")) {}
 			ImGui::Separator();
-			if (ImGui::MenuItem("Save Scene", "Ctr+S")) {}
+			if (ImGui::MenuItem("Save Scene", "Ctr+S")) 
+			{
+				mParent->GetEngine()->SaveCurrentScene();
+			}
 			if (ImGui::MenuItem("Save All Scene", "Ctr+Alt+S")) {}
 			ImGui::Separator();
 			if (ImGui::MenuItem("Close Scene","Alt+C")) {}
