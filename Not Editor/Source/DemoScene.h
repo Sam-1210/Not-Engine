@@ -5,9 +5,9 @@
 
 void DemoScene(Engine* eg)
 {
-	if (std::filesystem::exists("DemoScene.nsc"))
+	if (std::filesystem::exists("./Assets/Scenes/DemoScene.nsc"))
 	{
-		eg->AddScene(ResouceLoader::LoadScene("DemoScene.nsc"));
+		eg->AddScene(ResouceLoader::LoadScene("./Assets/Scenes/DemoScene.nsc"));
 		return;
 	}
 
@@ -48,6 +48,4 @@ void DemoScene(Engine* eg)
 		Box->SetScale(0.1f, 0.1f);
 		Group1->AddChild(Box);
 	}
-	
-	int i = 500;
 }

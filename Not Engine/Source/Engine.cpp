@@ -38,7 +38,7 @@ void Engine::AddScene(std::shared_ptr<Scene> sc)
 void Engine::SaveCurrentScene()
 {
 	NE_CORE_INFO("Saving Current Scene");
-	std::ofstream SceneFile(GetCurrentScene()->GetSceneName() + ".nsc");
+	std::ofstream SceneFile("./Assets/Scenes/" + GetCurrentScene()->GetSceneName() + ".nsc");
 	Scene::SaveScene(GetCurrentScene()->GetSceneRoot(), SceneFile);
 	SceneFile.close();
 	NE_CORE_INFO("Saving Current Scene Finished Successfully.");
