@@ -46,9 +46,9 @@ void Node2D::PropertyEditor()
 		tmpVec[1] = Scale.y;
 		if (ImGui::DragFloat2("Scale", tmpVec, 0.01f))
 			SetScale(glm::vec2(tmpVec[0], tmpVec[1]));
-		tmpVec[0] = glm::radians(Rotation);
+		tmpVec[0] = Rotation;
 		if (ImGui::DragFloat("Rotate", tmpVec, 1.0f, -180.0f, 180.0f))
-			SetRotation(glm::degrees(tmpVec[0]));
+			SetRotation(tmpVec[0]);
 		HeaderOpened = true;
 	}
 	else

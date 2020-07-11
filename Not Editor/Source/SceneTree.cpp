@@ -69,7 +69,7 @@ void SceneTree::Render()
 	static std::shared_ptr<ConfirmDialogue> Confirmation = std::dynamic_pointer_cast<ConfirmDialogue>(mParent->GetUtility("ConfirmDialogue"));
 
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-	ImGui::Begin("Scene Tree");
+	ImGui::Begin("Heirarchy");
 	flags.width = ImGui::GetWindowSize().x;
 	flags.height = ImGui::GetWindowSize().y;
 

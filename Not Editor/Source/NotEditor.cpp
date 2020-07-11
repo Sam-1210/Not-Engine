@@ -4,7 +4,7 @@
 #include "Inspector.h"
 #include "MenuBar.h"
 #include "NodeSpawner.h"
-#include "RenderingProfiler.h"
+#include "Profilers.h"
 #include "SceneTree.h"
 #include "Viewport.h"
 
@@ -91,7 +91,7 @@ void NotEditor::LoadEditor()
 
 	MainComponents["Inspector"] = std::shared_ptr<EditorComponents>(new Inspector(this));
 	MainComponents["MenuBar"] = std::shared_ptr<EditorComponents>(new MenuBar(this));
-	MainComponents["RenderingProfiler"] = std::shared_ptr<EditorComponents>(new RenderingProfiler(this));
+	MainComponents["Profilers"] = std::shared_ptr<EditorComponents>(new Profilers(this));
 	MainComponents["SceneTree"] = std::shared_ptr<EditorComponents>(new SceneTree(this));
 	MainComponents["Viewport"] = std::shared_ptr<EditorComponents>(new Viewport(this, 1280, 720));
 
@@ -138,10 +138,11 @@ void NotEditor::Render()
 		ImGuiID dock_id_right = ImGui::DockBuilderSplitNode(dock_main_id, ImGuiDir_Right, 0.30f, NULL, &dock_main_id);
 		ImGuiID dock_id_bottom = ImGui::DockBuilderSplitNode(dock_main_id, ImGuiDir_Down, 0.20f, NULL, &dock_main_id);
 
-		ImGui::DockBuilderDockWindow("Scene Tree", dock_id_left);
+		ImGui::DockBuilderDockWindow("Heirarchy", dock_id_left);
 		ImGui::DockBuilderDockWindow("Viewport", dock_main_id);
 		ImGui::DockBuilderDockWindow("Rendering Profiler", dock_id_bottom);
-		ImGui::DockBuilderDockWindow("Property Editor", dock_id_right);
+		ImGui::DockBuilderDockWindow("Driver Info", dock_id_bottom);
+		ImGui::DockBuilderDockWindow("Inspector", dock_id_right);
 		ImGui::DockBuilderFinish(dockspace_id);
 	}
 
