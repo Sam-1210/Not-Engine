@@ -11,13 +11,6 @@ Scene::~Scene()
 	delete SceneRoot;
 }
 
-void Scene::SaveScene(Node* node, std::ofstream& SceneFile)
-{
-	node->Save(SceneFile);
-	for (auto child : node->GetChildrens())
-		SaveScene(child, SceneFile);
-}
-
 void Scene::Load(std::ifstream& SceneFile)
 {
 	bool SceneVisiblity;
@@ -26,6 +19,13 @@ void Scene::Load(std::ifstream& SceneFile)
 	SceneRoot->SetID(SceneID);
 	SceneFile >> SceneVisiblity;
 	SceneRoot->SetVisible(SceneVisiblity);
+}
+
+void Scene::SaveScene(Node* node, std::ofstream& SceneFile)
+{
+	node->Save(SceneFile);
+	for (auto child : node->GetChildrens())
+		SaveScene(child, SceneFile);
 }
 
 void Scene::ProcessScene(Node* node)
