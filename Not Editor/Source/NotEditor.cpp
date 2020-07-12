@@ -9,6 +9,7 @@
 #include "Viewport.h"
 
 #include <filesystem>
+#include <fstream>
 #include <imgui.h>
 #include <imgui_internal.h>
 #include <imgui_impl_glfw.h>
@@ -29,6 +30,10 @@ NotEditor::NotEditor()
 
 NotEditor::~NotEditor()
 {
+	//-------------save editor conf----------------
+	std::ofstream fs("NotEditor.ncnf");
+	fs << Theme;
+	//-------------------------------------------
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();
@@ -48,7 +53,11 @@ void NotEditor::LoadEditor()
 	Loads Editor
 	checks if default scene exist, load it and push to stack
 	*/
-
+	if (std::filesystem::exists("NotEditor.ncnf"))
+	{
+		std::ifstream fs("NotEditor.ncnf");
+		fs >> Theme;
+	}
 	//--------------------------Initialize App------------------------------------------
 	EditorApp = new Application("Not Editor", glm::vec2(1280, 720), glm::vec2(320, 180),
 		glm::vec2(4, 6), true, false, false, WrapperEnum::Mode_Windowed, false);

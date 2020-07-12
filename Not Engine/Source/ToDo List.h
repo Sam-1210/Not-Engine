@@ -1,7 +1,6 @@
 #pragma once
 
 /** TODO:
-	1. icon
 	5. Childerns Transformations Relative to Parents
 	11. Context menu
 	12. object highlighting
@@ -23,4 +22,5 @@
 	27. handle editor class members, organisse and clean code.
 	28. faster save, save only modified objects if scene exist
 	29. space separated names fix by using [ ... ] and restrict object name from having [ and ] in name
+	30. PCH
 */
