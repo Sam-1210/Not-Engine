@@ -98,11 +98,11 @@ void SceneTree::Render()
 	if (ConfirmationStatus)
 		mSelection.node->DeleteSelf();
 
-	ImGui::SameLine();
-	char SearchBar[128] = "Search Nodes";
-	ImGui::PushItemWidth(-1);
-	ImGui::InputText("Search Nodes", SearchBar, IM_ARRAYSIZE(SearchBar));
-	ImGui::PopItemWidth();
+	//ImGui::SameLine();
+	//char SearchBar[128] = "Search Nodes";
+	//ImGui::PushItemWidth(-1);
+	//ImGui::InputText("Search Nodes", SearchBar, IM_ARRAYSIZE(SearchBar));
+	//ImGui::PopItemWidth();
 	ImGui::Separator();
 
 	mSelection.SelectedNodeIndex = -1;
