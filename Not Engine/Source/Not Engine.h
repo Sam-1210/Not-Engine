@@ -13,3 +13,7 @@
 #include "ResourceLoader.h"
 #include "ColorRect.h"
 #include "TextureRect.h"
+
+#ifdef NotApp
+	#include "Impl_Property_Editors.h"
+#endif // NotApp

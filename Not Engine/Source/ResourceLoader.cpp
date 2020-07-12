@@ -77,7 +77,7 @@ std::string ResouceLoader::NameParser(std::ifstream& SceneFile)
 
 std::shared_ptr<Scene> ResouceLoader::LoadScene(const std::string& Path)
 {
-	// Scene File Format : NodeType ParentID NodeName Visible __VA_ARGS_OF_DIFFERENT_NODES__
+	// Scene File Format : NodeType ParentID NodeName NodeID Visible __VA_ARGS_OF_DIFFERENT_NODES__
 
 	NE_CORE_INFO("Loading Scene From : {0}", Path);
 	std::ifstream SceneFile(Path);

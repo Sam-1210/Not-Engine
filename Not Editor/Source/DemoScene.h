@@ -5,9 +5,9 @@
 
 void DemoScene(Engine* eg)
 {
-	if (std::filesystem::exists("./Assets/Scenes/DemoScene.nsc"))
+	if (std::filesystem::exists("./Assets/Scenes/Demo Scene.nsc"))
 	{
-		eg->AddScene(ResouceLoader::LoadScene("./Assets/Scenes/DemoScene.nsc"));
+		eg->AddScene(ResouceLoader::LoadScene("./Assets/Scenes/Demo Scene.nsc"));
 		return;
 	}
 

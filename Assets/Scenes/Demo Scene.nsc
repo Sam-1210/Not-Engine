@@ -1,7 +1,7 @@
 [ Node ] [ Demo Scene ] 1 1
 [ TextureRect ] 1 [ BG ] 2 1 0 0 0 4 3 [ ./Assets/Materials/Textures/bg.png ]
-[ TextureRect ] 1 [ Player ] 3 1 0 -1 0 0.5 0.5 [ ./Assets/Materials/Textures/player.png ]
-[ TextureRect ] 1 [ Friend ] 4 1 20 -1 -0.5 0.5 0.5 [ ./Assets/Materials/Textures/friend.png ]
+[ TextureRect ] 1 [ Player ] 3 1 0 -0.62 0 0.5 0.5 [ ./Assets/Materials/Textures/player.png ]
+[ TextureRect ] 1 [ Friend ] 4 1 10 -1 -0.5 0.5 0.5 [ ./Assets/Materials/Textures/friend.png ]
 [ Node2D ] 1 [ Enemies ] 5 1 0 0 0 1 1
 [ TextureRect ] 5 [ Enemy ] 7 1 0 1 0.5 0.5 0.5 [ ./Assets/Materials/Textures/enemy0.png ]
 [ TextureRect ] 5 [ Enemy0 ] 8 1 0 1 -0.1 0.5 0.5 [ ./Assets/Materials/Textures/enemy1.png ]
