@@ -17,12 +17,14 @@ private:
 
 public:
 	WindowLayer(const std::string& Name, const int& width, const int& height, const bool& Vsync = true, const std::string& Path = "");
-	~WindowLayer();
+	virtual ~WindowLayer();
 
 	void MakeCurrentContext();
 	void Resize(const int& width, const int& height);
 	void Mode_FullScreen();
 	void Mode_Windowed();
+	void PollEvents();
+	void SwapBuffers();
 	void Close();
 
 	bool isOpen() const;
@@ -38,4 +40,6 @@ public:
 	void SetName(const std::string& Name);
 	void SetPosition(const int& PosX, const int& PosY);
 	void SetIcon(const std::string& IconPath);
+
+	static GLFWwindow* GetCurrentContext();
 };

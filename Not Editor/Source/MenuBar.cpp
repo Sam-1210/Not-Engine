@@ -31,7 +31,7 @@ void MenuBar::Render()
 			ImGui::Separator();
 			if (ImGui::MenuItem("Save Scene", "Ctr+S")) 
 			{
-				mParent->GetEngine()->SaveCurrentScene();
+				mParent->GetApp()->SaveCurrentScene();
 			}
 			if (ImGui::MenuItem("Save All Scene", "Ctr+Alt+S")) {}
 			ImGui::Separator();
@@ -39,7 +39,7 @@ void MenuBar::Render()
 			if (ImGui::MenuItem("Close All Scene", "Alt+Shift+C")) {}
 			ImGui::Separator();
 			if (ImGui::MenuItem("Exit", "Alt+F4"))
-				mParent->GetApp()->Exit();
+				mParent->GetApp()->Close();
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Edit"))

@@ -2,6 +2,7 @@
 #include "Log.h"
 #include <GLFW/glfw3.h>
 #include <filesystem>
+#include <iostream>
 #include <stb_image.h>
 
 void WindowLayer::ResizeWindowHandler(GLFWwindow* Window, int Width, int Height)
@@ -12,6 +13,8 @@ void WindowLayer::ResizeWindowHandler(GLFWwindow* Window, int Width, int Height)
 
 WindowLayer::WindowLayer(const std::string& Name, const int& width, const int& height, const bool& Vsync, const std::string& Path)
 {
+    std::cout << "\t\t\t\t\t:::::::: NotEngine ::::::::\n\n\n\n";
+    Logger::Init();
     mVSync = Vsync;
     mName = Name;
     mWidth = width;
@@ -55,6 +58,7 @@ WindowLayer::WindowLayer(const std::string& Name, const int& width, const int& h
 
 WindowLayer::~WindowLayer()
 {
+    NE_CORE_INFO("Window \"{0}\" Closed.", mName);
     glfwTerminate();
 }
 
@@ -78,6 +82,16 @@ void WindowLayer::Mode_FullScreen()
 void WindowLayer::Mode_Windowed()
 {
     NE_CORE_WARN("Implementation Pending.");
+}
+
+void WindowLayer::PollEvents()
+{
+    glfwPollEvents();
+}
+
+void WindowLayer::SwapBuffers()
+{
+    glfwSwapBuffers(mWindow);
 }
 
 void WindowLayer::Close()
@@ -149,4 +163,9 @@ void WindowLayer::SetIcon(const std::string& IconPath)
     {
         NE_CORE_WARN("Icon Path is Invalid.");
     }
+}
+
+GLFWwindow* WindowLayer::GetCurrentContext()
+{
+    return glfwGetCurrentContext();
 }

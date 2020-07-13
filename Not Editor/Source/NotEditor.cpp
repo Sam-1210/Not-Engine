@@ -38,8 +38,6 @@ NotEditor::~NotEditor()
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();
 	NE_CORE_INFO("Editor Shutdown");
-
-	delete EditorApp;
 }
 
 void NotEditor::ProjectPane()
@@ -59,18 +57,8 @@ void NotEditor::LoadEditor()
 		fs >> Theme;
 	}
 	//--------------------------Initialize App------------------------------------------
-	EditorApp = new Application("Not Editor", glm::vec2(1280, 720), glm::vec2(320, 180),
-		glm::vec2(4, 6), true, false, false, WrapperEnum::Mode_Windowed, false);
-
-	MyStatus status = EditorApp->Init();
-
-	EngineBackend = EditorApp->GetEngine();
-
-	DemoScene(EngineBackend);
-
-	bool setthisanywhereelse = false;
-	if (status != MyStatus::Init_Success)
-		setthisanywhereelse |= true;
+	EditorApp = new Application("Not Editor", 1280, 720);
+	DemoScene(EditorApp);
 
 	//----------------------------Set-up IMGUI----------------------------------------
 	ImGui::CreateContext();
@@ -93,7 +81,7 @@ void NotEditor::LoadEditor()
 
 	ChangeTheme(Theme);
 
-	ImGui_ImplGlfw_InitForOpenGL(EditorApp->GetWindowObject(), true);
+	ImGui_ImplGlfw_InitForOpenGL(EditorApp->GetRawWindow(), true);
 	ImGui_ImplOpenGL3_Init();
 
 	//------------------------------Initialize Editor Components and Utilities--------------------------------------------
@@ -107,7 +95,7 @@ void NotEditor::LoadEditor()
 	UtilityComponents["ConfirmDialogue"] = std::shared_ptr<EditorComponents>(new ConfirmDialogue(this));
 	UtilityComponents["NodeSpawner"] = std::shared_ptr<EditorComponents>(new NodeSpawner(this));
 
-	CurrentScene = EngineBackend->GetCurrentScene(); //--------------------------------this one to set according to files
+	CurrentScene = EditorApp->GetCurrentScene(); //--------------------------------this one to set according to files
 	NE_CORE_INFO("All Processes of Editor Started Successfully");
 }
 
@@ -170,24 +158,24 @@ void NotEditor::Render()
 
 	if (io->ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 	{
-		GLFWwindow* backup_current_context = glfwGetCurrentContext();
 		ImGui::UpdatePlatformWindows();
 		ImGui::RenderPlatformWindowsDefault();
-		glfwMakeContextCurrent(backup_current_context);
+		EditorApp->MakeCurrentContext();
 	}
 }
 
 void NotEditor::EditorLoop()
 {
-	while (EditorApp->WindowIsNotClosed())
+	while (EditorApp->isOpen())
 	{
 		Ready();
-		EngineBackend->NewFrame();
-		EngineBackend->Process();
-		EngineBackend->Update();
-		EngineBackend->Render();
+		EditorApp->Ready();
+		EditorApp->PollEvents();
+		EditorApp->Process();
+		EditorApp->Update();
+		EditorApp->Render();
 		Render();
-		EngineBackend->EndFrame();
+		EditorApp->SwapBuffers();
 	}
 }
 

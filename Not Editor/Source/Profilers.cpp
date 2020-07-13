@@ -6,9 +6,9 @@
 Profilers::Profilers(NotEditor* Parent)
 	: EditorComponents(Parent), flags({true, 0, 0})
 {
-	Vendor = mParent->GetApp()->GetVendor();
-	Renderer = mParent->GetApp()->GetRenderer();
-	Version = mParent->GetApp()->GetVersion();
+	Vendor = OpenGL::Core::GetVendor();
+	Renderer = OpenGL::Core::GetRenderer();
+	Version = OpenGL::Core::GetVersion();
 }
 
 Profilers::~Profilers()

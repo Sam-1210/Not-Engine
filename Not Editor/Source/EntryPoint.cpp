@@ -8,7 +8,10 @@ int main()
 	//ProjectPane::Start();
 	//std::string ProjectPath = ProjectPane::GetProjectPath;
 	//NotEditor instance(ProjectPath);
-	NotEditor instance;
-	instance.EditorLoop();
+	NotEditor* instance = new NotEditor();
+	instance->EditorLoop();
+	Application* app = instance->GetApp();
+	delete instance;
+	delete app;
 	return 0;
 }

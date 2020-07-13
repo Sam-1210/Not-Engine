@@ -3,16 +3,16 @@
 #include <filesystem>
 #include <string>
 
-void DemoScene(Engine* eg)
+void DemoScene(Application* MainApp)
 {
 	if (std::filesystem::exists("./Assets/Scenes/Demo Scene.nsc"))
 	{
-		eg->AddScene(ResouceLoader::LoadScene("./Assets/Scenes/Demo Scene.nsc"));
+		MainApp->AddScene(ResouceLoader::LoadScene("./Assets/Scenes/Demo Scene.nsc"));
 		return;
 	}
 
 	std::shared_ptr<Scene> newScene(new Scene("DemoScene"));
-	eg->AddScene(newScene);
+	MainApp->AddScene(newScene);
 	Node* root = newScene->GetSceneRoot();
 
 	Node2D* BG = new TextureRect("BG", EnginePath::TextureFolder + "bg.png");

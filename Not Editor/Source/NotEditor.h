@@ -5,7 +5,6 @@
 #include "MiscStructs.h"
 
 class Application;
-class Engine;
 class Scene;
 class EditorComponents;
 struct ImFont;
@@ -14,9 +13,8 @@ struct ImGuiIO;
 class NotEditor
 {
 private:
-	bool Theme;
 	Application* EditorApp;
-	Engine* EngineBackend;
+	bool Theme;
 	ImFont* EditorFont;
 	ImGuiIO* io;
 	SelectedNode mSelection;
@@ -38,7 +36,6 @@ public:
 	//-----------------------------------------Utility Functions------------------------------------------------------
 	void ChangeTheme(const bool& Theme);
 	inline Application* GetApp() { return EditorApp; }
-	inline Engine* GetEngine() { return EngineBackend; }
 	inline bool& GetTheme() { return Theme; }
 	inline SelectedNode& GetSelection() { return mSelection; }
 	inline std::shared_ptr<EditorComponents> GetComponent(const std::string& ComponentName) { return MainComponents[ComponentName]; }

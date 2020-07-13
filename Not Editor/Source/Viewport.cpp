@@ -15,7 +15,8 @@ void Viewport::Ready()
 		mWidth = lastWidth;
 		mHeight = lastHeight;
 		RenderData.Resize(lastWidth, lastHeight);
-		mParent->GetApp()->SetViewportSize(mWidth, mHeight);
+		OpenGL::Core::SetViewportSize(0, 0, mWidth, mHeight);
+		//mParent->GetApp()->SetViewportSize(mWidth, mHeight);
 	}
 
 	RenderData.Bind();

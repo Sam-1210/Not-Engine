@@ -23,7 +23,7 @@ void NodeSpawner::Render()
 	Application* App = mParent->GetApp();
 	Node* Parent = mParent->GetSelection().node;
 
-	ImGui::SetNextWindowSize(ImVec2(400.0f, App->GetWindowSize().y - 400.0f));
+	ImGui::SetNextWindowSize(ImVec2(400.0f, App->GetHeight() - 400.0f));
 
 	if (ImGui::BeginPopupModal("Node Spawner", &Close))
 	{
