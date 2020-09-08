@@ -96,7 +96,11 @@ void SceneTree::Render()
 		ConfirmationStatus = Confirmation->GetStatus();
 	}
 	if (ConfirmationStatus)
+	{
 		mSelection.node->DeleteSelf();
+		delete mSelection.node;
+		mSelection.node = nullptr;
+	}
 
 	//ImGui::SameLine();
 	//char SearchBar[128] = "Search Nodes";

@@ -1,13 +1,13 @@
 [ Node ] [ Demo Scene ] 1 1
-[ TextureRect ] 1 [ BG ] 2 1 0 0 0 4 3 [ ./Assets/Materials/Textures/bg.png ]
-[ TextureRect ] 1 [ Player ] 3 1 0 -0.62 0 0.5 0.5 [ ./Assets/Materials/Textures/player.png ]
-[ TextureRect ] 1 [ Friend ] 4 1 4 -1 -0.5 0.5 0.5 [ ./Assets/Materials/Textures/friend.png ]
+[ TextureRect ] 1 [ BG ] 2 1 0 -0.07 0 4 3 [ ./Assets/Materials/Textures/bg.png ]
+[ TextureRect ] 1 [ Player ] 3 1 0 -1 0.17 0.5 0.5 [ ./Assets/Materials/Textures/player.png ]
+[ TextureRect ] 1 [ Friend ] 4 1 1 -1 -0.5 0.5 0.5 [ ./Assets/Materials/Textures/friend.png ]
 [ Node2D ] 1 [ Enemies ] 5 1 0 0 0 1 1
 [ TextureRect ] 5 [ Enemy ] 7 1 0 1 0.5 0.5 0.5 [ ./Assets/Materials/Textures/enemy0.png ]
 [ TextureRect ] 5 [ Enemy0 ] 8 1 0 1 -0.1 0.5 0.5 [ ./Assets/Materials/Textures/enemy1.png ]
 [ TextureRect ] 5 [ Enemy1 ] 9 1 0 1 -0.7 0.5 0.5 [ ./Assets/Materials/Textures/enemy2.png ]
 [ Node2D ] 1 [ Wall ] 6 1 0 0 0 1 1
-[ ColorRect ] 6 [ Block0 ] 10 1 0 0 0.5 0.1 0.1 0.3 0.13 0.01 1
+[ ColorRect ] 6 [ Block0 ] 10 1 43 0 0.5 0.1 0.1 0.3 0.13 0.01 1
 [ ColorRect ] 6 [ Block1 ] 11 1 0 0 0.39 0.1 0.1 0.3 0.13 0.01 1
 [ ColorRect ] 6 [ Block2 ] 12 1 0 0 0.28 0.1 0.1 0.3 0.13 0.01 1
 [ ColorRect ] 6 [ Block3 ] 13 1 0 0 0.17 0.1 0.1 0.3 0.13 0.01 1

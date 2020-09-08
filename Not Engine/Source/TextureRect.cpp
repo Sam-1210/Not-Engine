@@ -53,11 +53,12 @@ void TextureRect::Load(std::ifstream& SceneFile)
 
 void TextureRect::_process()
 {
+	Rect2D::_process();
 }
 
-void TextureRect::_update()
+void TextureRect::_update(Camera* SceneCam)
 {
-	Rect2D::_update();
+	Rect2D::_update(SceneCam);
 }
 
 void TextureRect::_render()

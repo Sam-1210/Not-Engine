@@ -3,6 +3,7 @@
 #include <memory>
 
 class Shader;
+class Camera;
 
 class ColorRect : public Rect2D
 {
@@ -30,6 +31,6 @@ public:
 	void Save(std::ofstream& SceneFile) override;
 	void Load(std::ifstream& SceneFile) override;
 	void _process() override;
-	void _update() override;
+	void _update(Camera* SceneCam) override;
 	void _render() override;
 };

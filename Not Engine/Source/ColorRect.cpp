@@ -55,9 +55,9 @@ void ColorRect::_process()
 	Rect2D::_process();
 }
 
-void ColorRect::_update()
+void ColorRect::_update(Camera* SceneCam)
 {
-	Rect2D::_update();
+	Rect2D::_update(SceneCam);
 }
 
 void ColorRect::_render()

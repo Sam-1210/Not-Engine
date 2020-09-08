@@ -1,6 +1,8 @@
 #pragma once
 #include "Node2D.h"
 
+class Camera;
+
 class Rect2D : public Node2D
 {
 protected:
@@ -8,6 +10,7 @@ protected:
 	//Texture tex;
 	//Mesh mesh;
 	static bool BuffersSet;
+	static unsigned int Rect2D_Instances;
 	static unsigned int VBO;
 	static unsigned int VAO;
 	static float vertices[24];
@@ -16,6 +19,7 @@ protected:
 	glm::mat4 Mat_Projection;
 
 	static void SetBuffers();
+	static void FreeBuffers();
 public:
 	Rect2D(const std::string NodeName);
 	~Rect2D();
@@ -25,7 +29,7 @@ public:
 
 	virtual void PropertyEditor() = 0;
 	virtual void _process();
-	virtual void _update();
+	virtual void _update(Camera* SceneCam);
 	virtual void _render() = 0;
 };
 

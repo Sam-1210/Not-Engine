@@ -3,6 +3,8 @@
 #include "Shader.h"
 #include "Texture.h"
 
+class Camera;
+
 class TextureRect : public Rect2D
 {
 private:
@@ -25,7 +27,7 @@ public:
 
 	void Save(std::ofstream& SceneFile) override;
 	void Load(std::ifstream& SceneFile) override;
-	void _process();
-	void _update();
-	void _render();
+	void _process() override;
+	void _update(Camera* SceneCam) override;
+	void _render() override;
 };

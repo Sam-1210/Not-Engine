@@ -15,7 +15,7 @@ namespace ResouceLoader
 		unsigned long long ParentID;
 	};
 	ParsedNode NodeParser(std::ifstream& SceneFile);
-	Node* FindNode(Node* node, const int& ID);
+	Node* FindNode(Node* node, unsigned long long& ID);
 	std::string NameParser(std::ifstream& SceneFile);
 	std::shared_ptr<Scene> LoadScene(const std::string& Path);
 }

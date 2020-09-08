@@ -38,6 +38,7 @@ NotEditor::~NotEditor()
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();
 	NE_CORE_INFO("Editor Shutdown");
+	delete EditorApp;
 }
 
 void NotEditor::ProjectPane()
@@ -57,7 +58,8 @@ void NotEditor::LoadEditor()
 		fs >> Theme;
 	}
 	//--------------------------Initialize App------------------------------------------
-	EditorApp = new Application("Not Editor", 1280, 720);
+	EditorApp = new Application("Not Editor", 1366, 768);
+	EditorApp->SetPosition(550,200);
 	DemoScene(EditorApp);
 
 	//----------------------------Set-up IMGUI----------------------------------------
@@ -186,4 +188,9 @@ void NotEditor::ChangeTheme(const bool& Theme)
 		ImGui::StyleColorsLight();
 	else
 		ImGui::StyleColorsDark();
+}
+
+std::shared_ptr<Scene> NotEditor::GetCurrentScene()
+{
+	return EditorApp->GetCurrentScene();
 }

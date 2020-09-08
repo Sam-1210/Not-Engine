@@ -106,7 +106,11 @@ std::shared_ptr<Shader> Shader::Add(const std::string& ShaderName, const bool& E
 	if (ExistingShader)
 		return ExistingShader;
 	else
-		return std::shared_ptr<Shader>(new Shader(ShaderName, EnableGeometryShader));
+	{
+		std::shared_ptr<Shader> NewShader = std::shared_ptr<Shader>(new Shader(ShaderName, EnableGeometryShader));
+		Shaders.push_back(std::shared_ptr<Shader>(NewShader));
+		return NewShader;
+	}
 }
 
 std::shared_ptr<Shader> Shader::Get(const std::string& ShaderName)
@@ -146,8 +150,7 @@ Shader::Shader(const std::string& ShaderName, const bool& EnableGeometryShader)
 	else
 		NE_CORE_CRITICAL("Compiling Shader \"" + Name + "\" Failed");
 
-	IndexInCache = Shaders.size();
-	Shaders.push_back(std::shared_ptr<Shader>(this));
+	IndexInCache = unsigned int(Shaders.size());
 }
 
 Shader::~Shader()

@@ -2,11 +2,13 @@
 #include "Log.h"
 #include "ResourceLoader.h"
 #include "Scene.h"
+#include "Camera.h"
 
 Application::Application(const std::string& Name, const int& width, const int& height, const bool& Vsync, const std::string& Path)
 	:WindowLayer(Name, width, height, Vsync, Path)
 {
 	OpenGL::Core::LoadGL();
+	OpenGL::Core::SetBlending(true);
 	DefaultScene = -1;
 	CurrentScene = -1;
 }
@@ -42,13 +44,15 @@ void Application::Process()
 
 void Application::Update()
 {
-	if (Scenes[Scenes.size() - 1])
-		Scene::UpdateScene(Scenes[CurrentScene]->GetSceneRoot());
+	if (Scenes[CurrentScene])
+	{
+		Scene::UpdateScene(Scenes[CurrentScene]->GetSceneRoot(), Scenes[CurrentScene]->GetSceneCamera());
+	}
 }
 
 void Application::Render()
 {
-	if (Scenes[Scenes.size() - 1])
+	if (Scenes[CurrentScene])
 		Scene::RenderScene(Scenes[CurrentScene]->GetSceneRoot());
 }
 
@@ -59,6 +63,8 @@ void Application::MainLoop()
 		Ready();
 		PollEvents();
 		Process();
+		if (Scenes[CurrentScene])
+			Scenes[CurrentScene]->GetSceneCamera()->onResize(GetAspectRatio());
 		Update();
 		Render();
 		SwapBuffers();

@@ -4,11 +4,11 @@
 #include <filesystem>
 #include <iostream>
 #include <stb_image.h>
+#include "OpenGL_Core.h"
 
 void WindowLayer::ResizeWindowHandler(GLFWwindow* Window, int Width, int Height)
 {
-    NE_CORE_WARN("Implementation Pending");
-    //Issue Window Resized Event
+    OpenGL::Core::SetViewportSize(0, 0, Width, Height);
 }
 
 WindowLayer::WindowLayer(const std::string& Name, const int& width, const int& height, const bool& Vsync, const std::string& Path)
@@ -19,6 +19,7 @@ WindowLayer::WindowLayer(const std::string& Name, const int& width, const int& h
     mName = Name;
     mWidth = width;
     mHeight = height;
+    mAspectRatio = float(width) / float(height);
     
     if (!glfwInit())
     {
@@ -104,6 +105,11 @@ bool WindowLayer::isOpen() const
     return !(glfwWindowShouldClose(mWindow));
 }
 
+bool WindowLayer::isKeyPressed(NotKeyCodes Key)
+{
+    return (glfwGetKey(mWindow, (int)Key) == GLFW_PRESS);
+}
+
 int WindowLayer::GetWidth()
 {
     glfwGetWindowSize(mWindow, &mWidth, &mHeight);
@@ -163,9 +169,4 @@ void WindowLayer::SetIcon(const std::string& IconPath)
     {
         NE_CORE_WARN("Icon Path is Invalid.");
     }
-}
-
-GLFWwindow* WindowLayer::GetCurrentContext()
-{
-    return glfwGetCurrentContext();
 }

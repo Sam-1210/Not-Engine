@@ -1,6 +1,8 @@
 #include "Viewport.h"
 #include "NotEditor.h"
 #include <Application.h>
+#include <Camera.h>
+#include <Scene.h>
 #include <imgui.h>
 
 Viewport::Viewport(NotEditor* Parent, const int& Width, const int& Height)
@@ -15,8 +17,7 @@ void Viewport::Ready()
 		mWidth = lastWidth;
 		mHeight = lastHeight;
 		RenderData.Resize(lastWidth, lastHeight);
-		OpenGL::Core::SetViewportSize(0, 0, mWidth, mHeight);
-		//mParent->GetApp()->SetViewportSize(mWidth, mHeight);
+		mParent->GetApp()->GetCurrentScene()->GetSceneCamera()->onResize(float(mWidth)/float(mHeight));
 	}
 
 	RenderData.Bind();

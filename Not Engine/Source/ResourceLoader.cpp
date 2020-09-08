@@ -37,7 +37,7 @@ ResouceLoader::ParsedNode ResouceLoader::NodeParser(std::ifstream& SceneFile)
 	return { node, pID };
 }
 
-Node* ResouceLoader::FindNode(Node* node, const int& ID)
+Node* ResouceLoader::FindNode(Node* node, unsigned long long& ID)
 {
 	if (node->GetID() == ID)
 		return node;

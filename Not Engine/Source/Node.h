@@ -4,6 +4,8 @@
 #include <vector>
 #include "Global.h"
 
+class Camera;
+
 class Node
 {
 protected:
@@ -13,7 +15,10 @@ protected:
 	Node* Parent;
 	std::string Name;
 	std::vector<Node*> Childrens;
-
+	void (*mProcessSignal)(Node*);
+	void (*mUpdateSignal)(Node*);
+	void (*mRenderSignal)(Node*);
+	
 	static unsigned long long counter;
 public:
 	/** Creates Node with default name "Node" */
@@ -33,7 +38,7 @@ public:
 	virtual void Save(std::ofstream& SceneFile);
 	virtual void Load(std::ifstream& SceneFile);
 	virtual void _process();
-	virtual void _update();
+	virtual void _update(Camera* SceneCam);
 	virtual void _render();
 
 	inline bool isVisible() const { return this->Visible; }
@@ -41,6 +46,7 @@ public:
 	inline void Show() { this->Visible = true; }
 	inline void SetVisible(const bool& _isVisible) { this->Visible = _isVisible; }
 	inline void SetID(const unsigned long long& newID) { this->ID = newID; }
+	inline void SetProcessSignal(void(*ProcessSignal)(Node*)) { mProcessSignal = ProcessSignal; }
 
 	void Rename(std::string&& NewName);
 	void DeleteSelf();
@@ -51,12 +57,11 @@ public:
 	MyStatus RemoveChild(const std::string& ChildName);
 	MyStatus Reparent(Node* NewParent);
 
-	inline unsigned int GetChildrenCount() { return this->Childrens.size(); }
+	inline unsigned int GetChildrenCount() { return unsigned int(this->Childrens.size()); }
 	inline unsigned long long int GetID() { return ID; }
 	inline Node* GetChild(const unsigned int& Index) const { return this->Childrens[Index]; }
 	inline std::string GetNodeName() const { return this->Name; }
 	inline std::vector<Node*>& GetChildrens() { return this->Childrens; }
-
 	Node* GetChild(const std::string& ChildName) const;
 	Node* GetParent() const;
 	std::string GetParentName() const;

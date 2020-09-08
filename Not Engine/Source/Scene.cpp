@@ -1,9 +1,12 @@
 #include "Scene.h"
+#include "Application.h"
+#include "Camera.h"
 
 Scene::Scene(const std::string& _SceneName)
 {
 	this->SceneName = _SceneName;
 	SceneRoot = new Node(this->SceneName, true, true);
+	this->mSceneCamera = new Camera(1.0f);
 }
 
 Scene::~Scene()
@@ -35,11 +38,11 @@ void Scene::ProcessScene(Node* node)
 		ProcessScene(childs);
 }
 
-void Scene::UpdateScene(Node* node)
+void Scene::UpdateScene(Node* node, Camera* SceneCam)
 {
-	node->_update();
+	node->_update(SceneCam);
 	for (Node* childs : node->GetChildrens())
-		UpdateScene(childs);
+		UpdateScene(childs, SceneCam);
 }
 
 void Scene::RenderScene(Node* node)

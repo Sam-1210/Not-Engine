@@ -51,6 +51,14 @@ void NodeSpawner::Render()
 						Parent->AddChild(new ColorRect());
 					ImGui::TreePop();
 				}
+				ImGui::SetNextItemOpen(true);
+				if (ImGui::TreeNode("TextureRect"))
+				{
+					ImGui::SameLine(ImGui::GetWindowWidth() - 50);
+					if (ImGui::Button("Add##"))
+						Parent->AddChild(new TextureRect());
+					ImGui::TreePop();
+				}
 				ImGui::TreePop();
 			}
 			ImGui::TreePop();

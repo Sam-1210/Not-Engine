@@ -13,6 +13,7 @@ Node::Node()
 	Process = false;
 	Parent = nullptr;
 	ID = ++counter;
+	this->mProcessSignal = nullptr;
 }
 
 Node::Node(const std::string& NodeName)
@@ -22,6 +23,7 @@ Node::Node(const std::string& NodeName)
 	Process = true;
 	Parent = nullptr;
 	ID = ++counter;
+	this->mProcessSignal = nullptr;
 }
 
 Node::Node(const std::string& NodeName, const bool& isVisible, const bool& isProcess)
@@ -31,6 +33,7 @@ Node::Node(const std::string& NodeName, const bool& isVisible, const bool& isPro
 	this->Process = isProcess;
 	Parent = nullptr;
 	ID = ++counter;
+	this->mProcessSignal = nullptr;
 }
 
 Node::~Node()
@@ -59,9 +62,11 @@ void Node::Load(std::ifstream& SceneFile)
 
 void Node::_process()
 {
+	if (mProcessSignal)
+		(*mProcessSignal)(this);
 }
 
-void Node::_update()
+void Node::_update(Camera* SceneCam)
 {
 }
 

@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "NotKeyCodes.h"
 
 struct GLFWwindow;
 
@@ -7,13 +8,18 @@ class WindowLayer
 {
 private:
 	bool mVSync;
+	float mAspectRatio;
 	int mWidth;
 	int mHeight;
 	int mPosX;
 	int mPosY;
 	std::string mName;
 	GLFWwindow* mWindow;
+
+	static WindowLayer* CurrentContextLayer;
 	static void ResizeWindowHandler(GLFWwindow* Window, int Width, int Height);
+public:
+	inline static WindowLayer* GetCurrentContext() { return CurrentContextLayer; }
 
 public:
 	WindowLayer(const std::string& Name, const int& width, const int& height, const bool& Vsync = true, const std::string& Path = "");
@@ -28,6 +34,7 @@ public:
 	void Close();
 
 	bool isOpen() const;
+	bool isKeyPressed(NotKeyCodes Key);
 	int GetWidth();
 	int GetHeight();
 	int GetPosX();
@@ -40,6 +47,4 @@ public:
 	void SetName(const std::string& Name);
 	void SetPosition(const int& PosX, const int& PosY);
 	void SetIcon(const std::string& IconPath);
-
-	static GLFWwindow* GetCurrentContext();
 };

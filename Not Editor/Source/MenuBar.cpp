@@ -1,7 +1,7 @@
 #include "MenuBar.h"
 #include "NotEditor.h"
 #include <Application.h>
-#include <Engine.h>
+#include <Log.h>
 #include <imgui.h>
 
 MenuBar::MenuBar(NotEditor* Parent) : EditorComponents(Parent)
@@ -49,6 +49,17 @@ void MenuBar::Render()
 			}
 			if (ImGui::MenuItem("Redo"))
 			{
+			}
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("Build"))
+		{
+			if(ImGui::MenuItem("Build & Run"))
+			{
+				NE_CORE_INFO("Building \"Sandbox.npj\"");
+				mParent->GetApp()->SaveCurrentScene();
+				NE_CORE_INFO("Build Successfull!!!");
+				system("Sandbox\\Sandbox.exe");
 			}
 			ImGui::EndMenu();
 		}
