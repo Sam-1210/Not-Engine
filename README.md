@@ -39,5 +39,5 @@
 <h3>Community</h3>
 <br/>
 <p>
-  Currently Project have 0 contributors, If anyone have ideas for this project, share them with me, Find me on Instagram (@Linker.asm) or Facebook (@Satyam1210).
+  Currently Project have 0 contributors, If anyone have ideas for this project, share them with me, Find me on <a href="https://www.instagram.com/Linker.asm">Instagram (@Linker.asm)</a> or <a href="https://www.Facebook.com/Satyam1210">Facebook (@Satyam1210)</a>.
 </p>
