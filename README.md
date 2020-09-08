@@ -3,3 +3,36 @@
 <p>
   Not Engine is Early in Development Cross-Platform Graphics Engine, Based on Node Architecture with Support for Native Scripting
 </p>
+<h3>Aim</h3><br/
+<p>
+   Objective of this project is to create a complete Graphics Engine with support for both 2D and 3D graphics, to make engine able to draw complex geometries with best optimization techniques, such that it can be used either as an Backend Graphics API for C++ or Frontend Game Engine with a Feature Rich Editor (NotEditor).
+  <br/>This Project can be used by Teachers to help students understand the emerging need for OOP Paradigm, one can use this project to easily illustrate Class, Objects, Inheritance, Polymorphism etc.
+</p><br/>
+<h3>Progress</h3><br/>
+<p>
+  Currently Engine Features :
+  <ul>
+    <li>Basic Editor</li>
+    <li>Basic 2D Geometries</li>
+    <li>Native Scripting</li>
+    <li>Scene System</li>
+    <li>Save and Load Scene</li>
+  </ul>
+</p>
+<br/>
+<h3>Plan for Future</h3><br/>
+<p>
+  Following are Next to be Worked on :
+  <ul>
+    <li>Event System</li>
+    <li>Rendering Layer Abstraction</li>
+    <li>UI Components</li>
+    <li>Gizmo</li>
+    <li>More Rendering APIs Support</li>
+    <li>Custom Light Weight Data Structures Instead of Using GLM</li>
+    <li>VFS</li>
+    <li>File Archiving</li>
+    <li>Complete Custom Data File Parser (*.nsc, *nconf etc)</li>
+  </ul>
+</p>
+<br/>
