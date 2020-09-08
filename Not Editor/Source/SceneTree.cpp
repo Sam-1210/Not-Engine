@@ -69,7 +69,7 @@ void SceneTree::Render()
 	static std::shared_ptr<ConfirmDialogue> Confirmation = std::dynamic_pointer_cast<ConfirmDialogue>(mParent->GetUtility("ConfirmDialogue"));
 
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-	ImGui::Begin("Scene Tree");
+	ImGui::Begin("Heirarchy");
 	flags.width = ImGui::GetWindowSize().x;
 	flags.height = ImGui::GetWindowSize().y;
 
@@ -98,11 +98,11 @@ void SceneTree::Render()
 	if (ConfirmationStatus)
 		mSelection.node->DeleteSelf();
 
-	ImGui::SameLine();
-	char SearchBar[128] = "Search Nodes";
-	ImGui::PushItemWidth(-1);
-	ImGui::InputText("Search Nodes", SearchBar, IM_ARRAYSIZE(SearchBar));
-	ImGui::PopItemWidth();
+	//ImGui::SameLine();
+	//char SearchBar[128] = "Search Nodes";
+	//ImGui::PushItemWidth(-1);
+	//ImGui::InputText("Search Nodes", SearchBar, IM_ARRAYSIZE(SearchBar));
+	//ImGui::PopItemWidth();
 	ImGui::Separator();
 
 	mSelection.SelectedNodeIndex = -1;

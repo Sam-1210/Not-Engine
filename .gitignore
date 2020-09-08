@@ -1,10 +1,12 @@
 *.sln
+*.aps
 .vs/*
 *.NotLog
 imgui.ini
 *.vcxproj
 *.filters
 *.user
+*.ncnf
 bin/*
 bin-int/*
 

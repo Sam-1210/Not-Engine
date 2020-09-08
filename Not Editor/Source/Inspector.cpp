@@ -20,7 +20,7 @@ void Inspector::Render()
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
 	ImGui::PushStyleColor(ImGuiCol_ResizeGrip, 0);
 
-	ImGui::Begin("Property Editor");
+	ImGui::Begin("Inspector");
 
 	flags.width = ImGui::GetWindowSize().x;
 	flags.height = ImGui::GetWindowSize().y;

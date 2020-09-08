@@ -1,4 +1,7 @@
 #include "NotEditor.h"
+#include "Log.h"
+#include "WindowLayer.h"
+#include "GLFW/glfw3.h"
 
 int main()
 {

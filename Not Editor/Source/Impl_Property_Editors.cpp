@@ -46,9 +46,9 @@ void Node2D::PropertyEditor()
 		tmpVec[1] = Scale.y;
 		if (ImGui::DragFloat2("Scale", tmpVec, 0.01f))
 			SetScale(glm::vec2(tmpVec[0], tmpVec[1]));
-		tmpVec[0] = glm::radians(Rotation);
+		tmpVec[0] = Rotation;
 		if (ImGui::DragFloat("Rotate", tmpVec, 1.0f, -180.0f, 180.0f))
-			SetRotation(glm::degrees(tmpVec[0]));
+			SetRotation(tmpVec[0]);
 		HeaderOpened = true;
 	}
 	else
@@ -78,21 +78,26 @@ void TextureRect::PropertyEditor()
 {
 	Node2D::PropertyEditor();
 
-	static bool isNotCollapsed = true;
+	static bool MatEditor = false, isNotCollapsed = true;
+
 	ImGui::SetNextItemOpen(isNotCollapsed);
-	if (ImGui::CollapsingHeader("TextureRect"))
+	if (ImGui::CollapsingHeader("Texture"))
 	{
-		ImGui::Checkbox("Transparent", &isTransparent);
-		isNotCollapsed = true;
-		ImGui::Text("Preview Texture");
+		isNotCollapsed |= true;
 		ImTextureID TexPreview = (void*)TextureData->GetTextureID();
 		ImVec2 PanelSize = ImVec2(ImGui::GetWindowSize().x * 0.6, ImGui::GetWindowSize().x * 0.6);
 		ImGui::SetCursorPos(ImVec2((ImGui::GetWindowSize().x - PanelSize.x) / 2, ImGui::GetCursorPos().y));
-		if (ImGui::ImageButton(TexPreview, PanelSize, ImVec2(0, 1), ImVec2(1, 0), 2, ImVec4(0.0f, 0.0f, 0.0f, 1.0f)))
-		{ }
+
+		if (ImGui::ImageButton(TexPreview, PanelSize, ImVec2(0, 1), ImVec2(1, 0), 2, ImVec4(1.0f, 1.0f, 1.0f, 1.0f)))
+			MatEditor ^= true;
 	}
 	else
-		isNotCollapsed = false;
+		isNotCollapsed &= false;
+
+	if (MatEditor)
+	{
+		ImGui::Checkbox("Transparent", &isTransparent);
+	}
 }
 
 void Node3D::PropertyEditor()

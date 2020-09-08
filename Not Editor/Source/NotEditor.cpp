@@ -4,11 +4,12 @@
 #include "Inspector.h"
 #include "MenuBar.h"
 #include "NodeSpawner.h"
-#include "RenderingProfiler.h"
+#include "Profilers.h"
 #include "SceneTree.h"
 #include "Viewport.h"
 
 #include <filesystem>
+#include <fstream>
 #include <imgui.h>
 #include <imgui_internal.h>
 #include <imgui_impl_glfw.h>
@@ -29,6 +30,10 @@ NotEditor::NotEditor()
 
 NotEditor::~NotEditor()
 {
+	//-------------save editor conf----------------
+	std::ofstream fs("NotEditor.ncnf");
+	fs << Theme;
+	//-------------------------------------------
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();
@@ -48,7 +53,11 @@ void NotEditor::LoadEditor()
 	Loads Editor
 	checks if default scene exist, load it and push to stack
 	*/
-
+	if (std::filesystem::exists("NotEditor.ncnf"))
+	{
+		std::ifstream fs("NotEditor.ncnf");
+		fs >> Theme;
+	}
 	//--------------------------Initialize App------------------------------------------
 	EditorApp = new Application("Not Editor", glm::vec2(1280, 720), glm::vec2(320, 180),
 		glm::vec2(4, 6), true, false, false, WrapperEnum::Mode_Windowed, false);
@@ -91,7 +100,7 @@ void NotEditor::LoadEditor()
 
 	MainComponents["Inspector"] = std::shared_ptr<EditorComponents>(new Inspector(this));
 	MainComponents["MenuBar"] = std::shared_ptr<EditorComponents>(new MenuBar(this));
-	MainComponents["RenderingProfiler"] = std::shared_ptr<EditorComponents>(new RenderingProfiler(this));
+	MainComponents["Profilers"] = std::shared_ptr<EditorComponents>(new Profilers(this));
 	MainComponents["SceneTree"] = std::shared_ptr<EditorComponents>(new SceneTree(this));
 	MainComponents["Viewport"] = std::shared_ptr<EditorComponents>(new Viewport(this, 1280, 720));
 
@@ -138,10 +147,11 @@ void NotEditor::Render()
 		ImGuiID dock_id_right = ImGui::DockBuilderSplitNode(dock_main_id, ImGuiDir_Right, 0.30f, NULL, &dock_main_id);
 		ImGuiID dock_id_bottom = ImGui::DockBuilderSplitNode(dock_main_id, ImGuiDir_Down, 0.20f, NULL, &dock_main_id);
 
-		ImGui::DockBuilderDockWindow("Scene Tree", dock_id_left);
+		ImGui::DockBuilderDockWindow("Heirarchy", dock_id_left);
 		ImGui::DockBuilderDockWindow("Viewport", dock_main_id);
 		ImGui::DockBuilderDockWindow("Rendering Profiler", dock_id_bottom);
-		ImGui::DockBuilderDockWindow("Property Editor", dock_id_right);
+		ImGui::DockBuilderDockWindow("Driver Info", dock_id_bottom);
+		ImGui::DockBuilderDockWindow("Inspector", dock_id_right);
 		ImGui::DockBuilderFinish(dockspace_id);
 	}
 

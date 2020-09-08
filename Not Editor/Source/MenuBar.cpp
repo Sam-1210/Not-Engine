@@ -54,7 +54,7 @@ void MenuBar::Render()
 		}
 		if (ImGui::BeginMenu("View"))
 		{
-			if (ImGui::MenuItem("Rendering Profiler", nullptr, &mParent->GetComponent("RenderingProfiler")->GetFlag_Visible())) { }
+			if (ImGui::MenuItem("Profilers", nullptr, &mParent->GetComponent("Profilers")->GetFlag_Visible())) { }
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Options"))

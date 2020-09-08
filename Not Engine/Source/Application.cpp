@@ -3,6 +3,7 @@
 #include "Engine.h"
 #include "Log.h"
 #include <iostream>
+#include <stb_image.h>
 
 int Application::InstanceCounter = 0;
 Application* Application::ActiveApplication = nullptr;
@@ -73,7 +74,11 @@ MyStatus Application::Init()
 		NE_CORE_ERROR("Application Initialization Failed");
 		return MyStatus::Window_Creation_Error;
 	}
-
+	//------------------code to be removed----------------------------
+	GLFWimage Icon;
+	Icon.pixels = stbi_load("./Not Editor/Platforms/Windows/Resources/icon.png", &Icon.width, &Icon.height, nullptr, 4);
+	glfwSetWindowIcon(window, 1, &Icon);
+	//-----------------------------------------------------------------
 	SetContextCurrent(this);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, (int)GL_Version.x);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, (int)GL_Version.y);

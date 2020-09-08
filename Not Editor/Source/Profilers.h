@@ -2,7 +2,7 @@
 #include "EditorComponents.h"
 #include "MiscStructs.h"
 
-class RenderingProfiler : public EditorComponents
+class Profilers : public EditorComponents
 {
 private:
 	Panel flags;
@@ -11,8 +11,8 @@ private:
 	const char* Version;
 
 public:
-	RenderingProfiler(NotEditor* Parent);
-	~RenderingProfiler();
+	Profilers(NotEditor* Parent);
+	~Profilers();
 
 	inline bool& GetFlag_Visible() override { return flags.visible; }
 	void Ready() override;
