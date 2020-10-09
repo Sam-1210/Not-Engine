@@ -1,7 +1,3 @@
-#include "..\..\Not Engine\Source\ColorRect.h"
-#include "..\..\Not Engine\Source\ColorRect.h"
-#include "..\..\Not Engine\Source\Node.h"
-#include "..\..\Not Engine\Source\Node.h"
 #include <Not Engine.h>
 #include <imgui.h>
 #include <imgui_stdlib.h>
