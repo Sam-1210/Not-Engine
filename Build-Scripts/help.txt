@@ -1,0 +1,14 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Not Engine Build System Help ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. For Microsoft Windows :
+	- run buid.exe and follow instructions
+
+2. For Linux :
+	- Open terminal in this (Build-Scripts) directory and run :
+			chmod +x build.sh
+			sed -i -e 's/\r$//' build.sh
+			./build.sh
+
+3. For MacOS (xcode4) :
+	- Open terminal and run :
+			(cd ../ && ./Utils/bin/Premake/premake5 xcode4)
