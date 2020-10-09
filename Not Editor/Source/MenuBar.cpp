@@ -59,7 +59,8 @@ void MenuBar::Render()
 				NE_CORE_INFO("Building \"Sandbox.npj\"");
 				mParent->GetApp()->SaveCurrentScene();
 				NE_CORE_INFO("Build Successfull!!!");
-				system("Sandbox\\Sandbox.exe");
+				//run make/msvc and build solution and run
+				//system("Sandbox/Sandbox.exe");
 			}
 			ImGui::EndMenu();
 		}

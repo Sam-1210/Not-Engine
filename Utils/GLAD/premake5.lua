@@ -18,6 +18,9 @@ project "Glad"
         "include"
     }
     
+    filter "system:linux"
+        systemversion "latest"
+    
     filter "system:windows"
         systemversion "latest"
 

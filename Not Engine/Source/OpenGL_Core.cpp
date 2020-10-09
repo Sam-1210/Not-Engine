@@ -33,7 +33,7 @@ void OpenGL::Core::LoadGL()
 		bool OpenGL_Initialized = false;
 		assert(OpenGL_Initialized == true);
 	}
-	
+
 	std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Driver Info ~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 	std::cout << "Vendor\t\t:\t" << glGetString(GL_VENDOR) << "\n";
 	std::cout << "Renderer\t:\t" << glGetString(GL_RENDERER) << "\n";
