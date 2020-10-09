@@ -9,6 +9,6 @@ imgui.ini
 *.ncnf
 bin/*
 bin-int/*
-
+Makefile
 Utils/GLAD/bin/*
 Utils/GLAD/bin-int/*

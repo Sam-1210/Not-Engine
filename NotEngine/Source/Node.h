@@ -57,7 +57,7 @@ public:
 	MyStatus RemoveChild(const std::string& ChildName);
 	MyStatus Reparent(Node* NewParent);
 
-	inline unsigned int GetChildrenCount() { return unsigned int(this->Childrens.size()); }
+	inline unsigned int GetChildrenCount() { return (unsigned int)this->Childrens.size(); }
 	inline unsigned long long int GetID() { return ID; }
 	inline Node* GetChild(const unsigned int& Index) const { return this->Childrens[Index]; }
 	inline std::string GetNodeName() const { return this->Name; }

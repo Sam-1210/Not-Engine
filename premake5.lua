@@ -1,6 +1,6 @@
-workspace "Not Engine"
+workspace "Not"
 	architecture "x64"
-	startproject "Not Editor"
+	startproject "NotEditor"
 	configurations 
 	{ 	
 		"Debug", 
@@ -29,8 +29,8 @@ group "Dependencies"
 	include "Utils/IMGUI"
 group ""
 
-project "Not Engine"
-	location "Not Engine"
+project "NotEngine"
+	location "NotEngine"
 	kind "StaticLib"
 	language "C++"
 	cppdialect "C++17"
@@ -110,8 +110,8 @@ project "Not Engine"
         optimize "On"
 
 
-project "Not Editor"
-	location "Not Editor"
+project "NotEditor"
+	location "NotEditor"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"
@@ -131,7 +131,7 @@ project "Not Editor"
 
 	includedirs
 	{
-		"Not Engine/Source",
+		"NotEngine/Source",
 		"%{UtilsDir.GLAD}/include",
 		"%{UtilsDir.GLFW}/include",
 		"%{UtilsDir.ImGui}",
@@ -144,7 +144,7 @@ project "Not Editor"
 
 	links 
 	{ 
-		"Not Engine",
+		"NotEngine",
 		"GLAD",
 		"GLFW",
 		"IMGUI",
@@ -209,7 +209,7 @@ project "Sandbox"
 
 	includedirs
 	{
-		"Not Engine/Source",
+		"NotEngine/Source",
 		"%{UtilsDir.GLAD}/include",
 		"%{UtilsDir.GLFW}/include",
 		"%{UtilsDir.ImGui}",
@@ -222,7 +222,7 @@ project "Sandbox"
 
 	links 
 	{ 
-		"Not Engine",
+		"NotEngine",
 		"GLAD",
 		"GLFW",
 		"IMGUI",

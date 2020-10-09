@@ -150,7 +150,7 @@ Shader::Shader(const std::string& ShaderName, const bool& EnableGeometryShader)
 	else
 		NE_CORE_CRITICAL("Compiling Shader \"" + Name + "\" Failed");
 
-	IndexInCache = unsigned int(Shaders.size());
+	IndexInCache = (unsigned int)Shaders.size();
 }
 
 Shader::~Shader()
