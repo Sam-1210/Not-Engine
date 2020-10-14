@@ -20,6 +20,25 @@
   </ul>
 </p>
 <br/>
+<h3>Building</h3><br/>
+<p>
+  Follow these steps :
+  <ol>
+    <li>Clone Repository <b>(Note : use --recurse-submodules)</b></li>
+    <li>Go to Build-Scripts directory and follow building guide for different platforms from help.txt</li>
+    <li>For Visual Studio, open Not.sln and compile.</li>
+    <li>For Codelite, open Not.project and compile.</li>
+    <li>For gmake/gmake2 open terminal and type make in root solution directory <b>(Tip : use <i>"-j num_of_cpu"</i> flag for faster build with make).</li>
+  </ol>
+  <b>Note :
+  <ol>
+    <li>Windows gcc builds aren't supported yet, working on solution.</li>
+    <li>If you can't find Build-Scripts folder, change branch to alpha using <i>"git checkout alpha".</i></li>
+    <li>When building on Linux, make sure you've installed required dependencies like x11, xinput, mesa etc before compiling.</li>
+    <li>On Linux, make sure you've installed graphics driver with support for OpenGL 4.x .</li>
+  </ol> 
+  </b>
+</p>
 <h3>Plan for Future</h3><br/>
 <p>
   Following are Next to be Worked on :
