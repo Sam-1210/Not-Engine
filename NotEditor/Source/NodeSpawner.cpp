@@ -56,7 +56,7 @@ void NodeSpawner::Render()
 				{
 					ImGui::SameLine(ImGui::GetWindowWidth() - 50);
 					if (ImGui::Button("Add##"))
-						Parent->AddChild(new TextureRect());
+						Parent->AddChild(new TextureRect("TexRect", EnginePath::TextureFolder + "logo.png"));
 					ImGui::TreePop();
 				}
 				ImGui::TreePop();
