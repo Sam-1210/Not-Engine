@@ -77,11 +77,28 @@ void WindowLayer::Resize(const int& width, const int& height)
 
 void WindowLayer::Mode_FullScreen()
 {
-    NE_CORE_WARN("Implementation Pending.");
+    int count;
+    GLFWmonitor** monitors = glfwGetMonitors(&count);
+    if(monitor_index>=0 && monitor_index<=count){
+        GLFWmonitor* monitor = monitors[monitor_index];
+        const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+        const char* name = glfwGetMonitorName(monitor);
+        NE_CORE_INFO(std::string(count)+"monitor(s) found.")
+        NE_CORE_INFO("using "+std::string(name)+"monitor.")
+        glfwSetWindowMonitor(window,monitor,0, 0, mode->width, mode->height, mode->refreshRate);
+	    bool is_FullScreen=1;
+    } 
+    NE_CORE_WARN("unrecogonized monitor number.");
 }
 
 void WindowLayer::Mode_Windowed()
 {
+    
+	bool is_FullScreen=1;
+    GLFWmonitor* monitor = glfwGetWindowMonitor(window);
+    const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+    glfwSetWindowMonitor(window,nullptr,mPosX, mPosY, mWidth, mHeight, mode->refreshRate);
+
     NE_CORE_WARN("Implementation Pending.");
 }
 
