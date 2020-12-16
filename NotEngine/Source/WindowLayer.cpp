@@ -75,7 +75,7 @@ void WindowLayer::Resize(const int& width, const int& height)
     glfwSetWindowSize(mWindow, width, height);
 }
 
-void WindowLayer::Mode_FullScreen()
+void WindowLayer::Mode_FullScreen(int monitor_index=0)
 {
     int count;
     GLFWmonitor** monitors = glfwGetMonitors(&count);
