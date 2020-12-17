@@ -1,5 +1,9 @@
 <p align="center"><img src = "https://drive.google.com/uc?export=view&id=1OPrELTXz6m4MTQDEt43r9N4Ih5-IRutS" width="400" height="400"/></p>
+<<<<<<< HEAD
 <h1> NOT(!) Engine (Alpha)</h1>
+=======
+<h1> NOT(!) Engine </h1>
+>>>>>>> ce5a72822e9d9e27edad1be230f9502e116aabfb
 <p>
   Not Engine is Early in Development Cross-Platform Graphics Engine, Based on Node Architecture with Support for Native Scripting
 </p>
