@@ -1,8 +1,16 @@
 #pragma once
 #include <string>
+#include "Core.h"
 #include "NotKeyCodes.h"
 
 struct GLFWwindow;
+
+enum WindowModes : int16_t
+{
+	ModeWindowed = 1,
+	ModeBorderlessWindow = LSH(1),
+	ModeFullscreen = LSH(2),
+};
 
 class WindowLayer
 {
@@ -15,21 +23,18 @@ private:
 	int mPosY;
 	std::string mName;
 	GLFWwindow* mWindow;
+	WindowModes mMode;
 
 	static WindowLayer* CurrentContextLayer;
 	static void ResizeWindowHandler(GLFWwindow* Window, int Width, int Height);
+
 public:
-	inline static WindowLayer* GetCurrentContext() { return CurrentContextLayer; }
-public:
-	bool is_FullScreen=0;
-public:
-	WindowLayer(const std::string& Name, const int& width, const int& height, const bool& Vsync = true, const std::string& Path = "");
+	WindowLayer(const std::string& Name, int32_t width, int32_t height, bool Vsync = true, WindowModes Mode = ModeWindowed, const std::string& IconPath = "");
 	virtual ~WindowLayer();
 
 	void MakeCurrentContext();
 	void Resize(const int& width, const int& height);
-	void Mode_FullScreen();
-	void Mode_Windowed();
+	void SwitchMode(WindowModes Mode);
 	void PollEvents();
 	void SwapBuffers();
 	void Close();
@@ -43,8 +48,9 @@ public:
 	float GetAspectRatio();
 	inline GLFWwindow* GetRawWindow() const { return mWindow; }
 	inline std::string GetWindowName() const { return mName; }
+	inline static WindowLayer* GetCurrentContext() { return CurrentContextLayer; }
 
-	void SetVsync(const bool& EnableVsync);
+	void SetVSync(const bool& EnableVsync);
 	void SetName(const std::string& Name);
 	void SetPosition(const int& PosX, const int& PosY);
 	void SetIcon(const std::string& IconPath);

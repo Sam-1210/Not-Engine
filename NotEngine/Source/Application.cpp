@@ -4,8 +4,8 @@
 #include "Scene.h"
 #include "Camera.h"
 
-Application::Application(const std::string& Name, const int& width, const int& height, const bool& Vsync, const std::string& Path)
-	:WindowLayer(Name, width, height, Vsync, Path)
+Application::Application(const std::string& Name, int32_t width, int32_t height, bool Vsync, WindowModes Mode, const std::string& IconPath)
+	:WindowLayer(Name, width, height, Vsync, Mode, IconPath)
 {
 	OpenGL::Core::LoadGL();
 	OpenGL::Core::SetBlending(true);
