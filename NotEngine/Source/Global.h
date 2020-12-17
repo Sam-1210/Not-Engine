@@ -1,4 +1,5 @@
 #pragma once
+//// The Features of this file will be moved into other section in future releases, and this file will be deprecated.
 #include <string>
 #include <vector>
 #define LOG_D(MSG, FILE)
@@ -18,13 +19,6 @@ enum class MyStatus : unsigned int
 	ErrException, 
 	ErrNoParent,
 	ErrIndexOutOfBounds,
-};
-
-enum class WrapperEnum : unsigned int
-{
-	Mode_Windowed,
-	Mode_BorderlessFullscreen,
-	Mode_Fullsceen,
 };
 
 enum class SceneType : unsigned int
