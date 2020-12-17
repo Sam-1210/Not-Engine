@@ -130,12 +130,12 @@ Shader::Shader(const std::string& ShaderName, const bool& EnableGeometryShader)
 
 	Compiled_VS = CompileShader(ShaderEnum::Shader_Vertex);
 	Compiled_FS = CompileShader(ShaderEnum::Shader_Fragment);
-	if(EnableGeometryShader){
+	if(EnableGeometryShader)
 		Compiled_GS = CompileShader(ShaderEnum::Shader_Geometry);
-		glAttachShader(Program, Compiled_GS);
-	}
 
 	glAttachShader(Program, Compiled_VS);
+	if(EnableGeometryShader)
+		glAttachShader(Program, Compiled_GS);
 	glAttachShader(Program, Compiled_FS);
 	glValidateProgram(Program);
 	glLinkProgram(Program);
