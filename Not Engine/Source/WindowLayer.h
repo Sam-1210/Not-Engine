@@ -14,7 +14,8 @@ private:
 	std::string mName;
 	GLFWwindow* mWindow;
 	static void ResizeWindowHandler(GLFWwindow* Window, int Width, int Height);
-
+public:
+	bool is_FullScreen=0;
 public:
 	WindowLayer(const std::string& Name, const int& width, const int& height, const bool& Vsync = true, const std::string& Path = "");
 	~WindowLayer();
