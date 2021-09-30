@@ -36,7 +36,18 @@
     <li>If you can't find Build-Scripts folder, change branch to alpha using <i>"git checkout alpha".</i></li>
     <li>When building on Linux, make sure you've installed required dependencies like x11, xinput, mesa etc before compiling.</li>
     <li>On Linux, make sure you've installed graphics driver with support for OpenGL 4.x .</li>
-  </ul>
+   </ul>
+   <details>
+     <summary>Installing Dependencies (Linux)</summary>
+     
+`sudo apt-get install libx11-dev`<br/>
+`sudo apt-get install libxcb-xinput-dev`<br/>
+`sudo apt-get install mesa-common-dev`<br/>
+`sudo apt-get install libxcursor-dev`<br/>
+`sudo apt-get install libxrandr-dev`<br/>
+`sudo apt-get install libxinerama-dev`<br/>
+`sudo apt-get install libxi-dev` <br/>
+    </details>
   </b>
 </p>
 <h3>Plan for Future</h3><br/>
